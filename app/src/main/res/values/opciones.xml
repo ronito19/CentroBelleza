@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="combo_tratamientos">
+        <item>Peluqueria</item>
+        <item>Manicura</item>
+        <item>Pedicura</item>
+        <item>Maquillaje</item>
+        <item>Limpieza Facial</item>
+        <item>Tratamientos Generales</item>
+    </string-array>
+
+</resources>

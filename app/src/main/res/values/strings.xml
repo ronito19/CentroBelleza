@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Centro de Belleza GALA</string>
+    <string name="centro_de_belleza_gala">Centro de Belleza GALA</string>
+    <string name="entrar">ENTRAR</string>
+    <string name="bienvenido">BIENVENIDO</string>
+    <string name="correo_electronico">Correo electronico</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar sesion</string>
+    <string name="no_estas_registrado">No estas registrado?</string>
+    <string name="registrate">Registrate</string>
+    <string name="telefono">Telefono</string>
+    <string name="fecha_nac_dd_mm_yyyy">Fecha Nac.(dd/mm/yyyy)</string>
+    <string name="apellidos_s">Apellidos(s)</string>
+    <string name="nombre_s">Nombre(s)</string>
+    <string name="confirmar_contrase_a">Confirmar contraseña</string>
+    <string name="string_confirmar_contrase_a" />
+    <string name="registrarse">REGISTRATE</string>
+
+</resources>

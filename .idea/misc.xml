@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout-v23/activity_main_registrarse.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main1_logueo.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main2_registrarse.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main3_bienvenida.xml" value="0.1" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main4_menu.xml" value="0.264" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main5_coger_cita.xml" value="0.264" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_bienvenida.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_logueo.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_registrarse.xml" value="0.264" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_registrate.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_registro.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/GIT/TFG-Ronnie/CentroDeBellezaGALA/app/src/main/res/layout/estilospinner.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/P.M.D.M/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_bienvenida.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/P.M.D.M/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_registrate.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/P.M.D.M/CentroDeBellezaGALA/app/src/main/res/layout/activity_main_registro.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/P.M.D.M/CentrodeBellezaGALA/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/ronnie/Desktop/P.M.D.M/CentrodeBellezaGALA/app/src/main/res/layout/activity_main_bienvenida.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ronnie/Desktop/P.M.D.M/CentrodeBellezaGALA/app/src/main/res/layout/activity_main_registro.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
