@@ -57,21 +57,22 @@
         app:layout_constraintEnd_toEndOf="@+id/txt_fecha"
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="@+id/txt_fecha"
-        app:layout_constraintTop_toBottomOf="@+id/txt_fecha" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_fecha"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/bt_guardar_cita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:onClick="guardar_Cita"
         android:text="GUARDAR  CITA"
         android:textSize="20sp"
         android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="@+id/edt_hora"
+        app:layout_constraintEnd_toEndOf="@+id/sp_hora"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/edt_hora"
-        app:layout_constraintTop_toBottomOf="@+id/edt_hora" />
+        app:layout_constraintStart_toStartOf="@+id/sp_hora"
+        app:layout_constraintTop_toBottomOf="@+id/sp_hora" />
 
     <Spinner
         android:id="@+id/sp_tratamientos"
@@ -100,20 +101,15 @@
         app:layout_constraintStart_toStartOf="@+id/sp_tratamientos"
         app:layout_constraintTop_toBottomOf="@+id/sp_tratamientos" />
 
-    <EditText
-        android:id="@+id/edt_hora"
-        android:layout_width="375dp"
+    <Spinner
+        android:id="@+id/sp_hora"
+        android:layout_width="367dp"
         android:layout_height="48dp"
-        android:layout_marginTop="80dp"
-        android:ems="10"
-        android:hint="Selecciona una hora:"
-        android:inputType="textPersonName"
-        android:onClick="escoger_hora"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:layout_marginTop="76dp"
         app:layout_constraintEnd_toEndOf="@+id/edt_fecha"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="@+id/edt_fecha"
-        app:layout_constraintTop_toBottomOf="@+id/edt_fecha" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_fecha"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

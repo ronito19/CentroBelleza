@@ -8,14 +8,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.centrodebellezagala.clases.Citas;
 import com.example.centrodebellezagala.controladores.CitaFirebaseController;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.core.view.View;
+
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     private TextView txt_fecha;
     private EditText edt_fecha;
     private TextView txt_hora;
-    private EditText edt_hora;
+    private Spinner sp_hora;
     private FirebaseAuth mAuth;
 
     Citas cit;
@@ -51,7 +51,7 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
         txt_fecha = (TextView) findViewById(R.id.txt_fecha);
         edt_fecha = (EditText) findViewById(R.id.edt_fecha);
         txt_hora = (TextView) findViewById(R.id.txt_hora);
-        edt_hora = (EditText) findViewById(R.id.edt_hora);
+        sp_hora = (Spinner) findViewById(R.id.sp_hora);
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -62,6 +62,15 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.estilospinner, tratamientos);
             sp_tratamientos.setAdapter(adapter);
             sp_tratamientos.setOnItemSelectedListener(this);
+        }
+
+        if(sp_hora != null)
+        {
+            String[] horas = {"<Selecciona una hora>", " 09:00 - 10:00 ", " 10:00 - 11:00 ", " 11:00 - 12:00 ", " 12:00 - 13:00 ",
+                            " 13:00 - 14:00 ", " 17:00 - 18:00 ", " 18:00 - 19:00 ", " 19:00 - 20:00 ", " 20:00 - 21:00 "};
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.estilospinner1, horas);
+            sp_hora.setAdapter(adapter);
+            sp_hora.setOnItemSelectedListener(this);
         }
     }
 
@@ -81,18 +90,12 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
 
 
 
-    public void escoger_fecha(android.view.View view)
+    public void escoger_fecha(View view)
     {
         DatePickerFragment calendario1 = new DatePickerFragment();
         calendario1.show(getSupportFragmentManager(), "DatePicker");
     }
 
-
-    public void escoger_hora(android.view.View view)
-    {
-        TimePickerFragment reloj1 = new TimePickerFragment();
-        reloj1.show(getSupportFragmentManager(), "TimePicker");
-    }
 
 
     public void seleccionar_Fecha(int anyo, int mes, int dia)
@@ -104,37 +107,13 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
         edt_fecha.setText(fecha);
     }
 
-    public void seleccionar_Hora(int horas, int minutos)
-    {
-        String texto_hora = "";
-        String texto_minutos = "";
-        if(horas < 10)
-        {
-            texto_hora = "0" + String.valueOf(horas);
-        }
-        else
-        {
-            texto_hora = String.valueOf(horas);
-        }
-        if(minutos < 10)
-        {
-            texto_minutos = "0" + String.valueOf(minutos);
-        }
-        else
-        {
-            texto_minutos = String.valueOf(minutos);
-        }
 
-        hora = texto_hora + ":" + texto_minutos;
-        edt_hora.setText(hora);
-    }
-
-    public void guardar_Cita(android.view.View view) {
+    public void guardar_Cita(View view) {
 
 
         tratamientos = sp_tratamientos.toString();
         fecha = String.valueOf(edt_fecha.getText());
-        hora = String.valueOf(edt_hora.getText());
+        hora = sp_hora.toString();
 
         cit = new Citas(tratamientos, fecha, hora);
 
