@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cogercita">
+    android:background="@drawable/cogercita"
+    android:textAlignment="center">
 
     <ImageView
         android:id="@+id/img_vista_coger_cita"
@@ -79,6 +80,8 @@
         android:layout_width="375dp"
         android:layout_height="48dp"
         android:layout_marginTop="96dp"
+        android:gravity="center"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,8 +97,10 @@
         android:hint="Selecciona una fecha:"
         android:inputType="textPersonName"
         android:onClick="escoger_fecha"
+        android:focusableInTouchMode="false"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/sp_tratamientos"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/sp_tratamientos"
@@ -106,6 +111,7 @@
         android:layout_width="367dp"
         android:layout_height="48dp"
         android:layout_marginTop="76dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/edt_fecha"
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="@+id/edt_fecha"

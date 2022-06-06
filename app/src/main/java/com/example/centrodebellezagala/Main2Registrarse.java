@@ -6,17 +6,22 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.centrodebellezagala.clases.Clientes;
 import com.example.centrodebellezagala.controladores.ClienteFirebaseController;
 import com.example.centrodebellezagala.utilidades.ImagenesFirebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -47,26 +52,27 @@ public class Main2Registrarse extends AppCompatActivity
     Uri imagen_seleccionada = null;
 
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        FirebaseAuth.getInstance().signOut();
+    }
+
 
     @Override
     public void onStart()
     {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null)
         {
-            currentUser.reload();
-        }
-        else
-        {
-            Toast.makeText(Main2Registrarse.this, " Debes autenticarte ", Toast.LENGTH_SHORT).show();
-            FirebaseUser user = mAuth.getCurrentUser();
-            //updateUI(user);
-            Intent intent = new Intent(Main2Registrarse.this, Main3Bienvenida.class);
+            Intent intent = new Intent(Main2Registrarse.this,Main1Logueo.class);
             startActivity(intent);
+            finish();
         }
     }
+
 
 
 
@@ -98,65 +104,89 @@ public class Main2Registrarse extends AppCompatActivity
             String apellidos = String.valueOf(edt_apellidos.getText());
             Integer edad = Integer.parseInt(String.valueOf(edt_edad.getText()));
             String telefono = String.valueOf(edt_telefono.getText());
-            String correo = String.valueOf(edt_correo.getText());
+            String correo = String.valueOf(edt_correo.getText()).trim();
             String clave = String.valueOf(edt_clave.getText());
-
-
-            if (imagen_seleccionada != null)
-            {
-                String email = mAuth.getCurrentUser().getEmail();
-                new ImagenesFirebase().subirFoto(new ImagenesFirebase.FotoStatus()
-                {
-                    @Override
-                    public void FotoIsDownload(byte[] bytes) {
-                    }
-
-                    @Override
-                    public void FotoIsDelete() {
-                    }
-
-                    @Override
-                    public void FotoIsUpload() {
-                        Toast.makeText(Main2Registrarse.this, " La foto se ha guardado correctamente ", Toast.LENGTH_LONG).show();
-                    }
-
-                }, email, img_registrarse);
-
-                cli = new Clientes(nombre, apellidos, edad, telefono, correo, clave, email + "/" + ".png");
-            } else
-            {
-                cli = new Clientes(nombre, apellidos, edad, telefono, correo, clave, null);
-            }
-            new ClienteFirebaseController().insertarCliente(new ClienteFirebaseController.ClienteStatus()
+            mAuth.createUserWithEmailAndPassword(correo, clave).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
             {
                 @Override
-                public void clienteIsLoaded(List<Clientes> clientes, List<String> keys)
+                public void onComplete(@NonNull Task<AuthResult> task)
                 {
+                    if (task.isSuccessful())
+                    {
 
+
+                        if (imagen_seleccionada != null)
+                        {
+                            String email = mAuth.getCurrentUser().getEmail();
+                            new ImagenesFirebase().subirFoto(new ImagenesFirebase.FotoStatus()
+                            {
+                                @Override
+                                public void FotoIsDownload(byte[] bytes) {
+                                }
+
+                                @Override
+                                public void FotoIsDelete() {
+                                }
+
+                                @Override
+                                public void FotoIsUpload() {
+                                    Toast.makeText(Main2Registrarse.this, " La foto se ha guardado correctamente ", Toast.LENGTH_LONG).show();
+                                }
+
+                            }, email, img_registrarse);
+
+                            cli = new Clientes(nombre, apellidos, edad, telefono, correo, clave, email + "/" + ".png");
+                        }
+                        else
+                        {
+                            cli = new Clientes(nombre, apellidos, edad, telefono, correo, clave, null);
+                        }
+                        new ClienteFirebaseController().insertarCliente(new ClienteFirebaseController.ClienteStatus()
+                        {
+                            @Override
+                            public void clienteIsLoaded(List<Clientes> clientes, List<String> keys)
+                            {
+
+                            }
+
+                            @Override
+                            public void clienteIsAdd()
+                            {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.i("firebasedb", "createUserWithEmail:success");
+                                Toast.makeText(Main2Registrarse.this, " El cliente se ha registrado correctamente, BIENVENIDO ", Toast.LENGTH_LONG).show();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Intent intent = new Intent(Main2Registrarse.this, Main1Logueo.class);
+                                startActivity(intent);
+
+                            }
+
+                            @Override
+                            public void clienteIsUpdate()
+                            {
+
+                            }
+
+                            @Override
+                            public void clienteIsDelete()
+                            {
+
+                            }
+
+                            @Override
+                            public void clienteIsEncontrado(Clientes cli)
+                            {
+
+                            }
+                        }, cli,mAuth);
+                    }
+                    else
+                    {
+                        Log.i("firebasedb", "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(Main2Registrarse.this, "Autenticacion fallida", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
-                @Override
-                public void clienteIsAdd()
-                {
-                    // aquí hay que poner cuando se haya insertado bien qué hacer
-                    Toast.makeText(Main2Registrarse.this, " El cliente se ha registrado correctamente, BIENVENIDO ", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Main2Registrarse.this, Main1Logueo.class);
-                    startActivity(intent);
-
-                }
-
-                @Override
-                public void clienteIsUpdate()
-                {
-
-                }
-
-                @Override
-                public void clienteIsDelete()
-                {
-
-                }
-            }, cli);
+            });
         }
     }
 
@@ -167,7 +197,7 @@ public class Main2Registrarse extends AppCompatActivity
 
             String nombre = edt_nombre.getText().toString();
             String apellidos = edt_apellidos.getText().toString();
-            int edad = Integer.valueOf(edt_edad.getText().toString());
+            Integer edad = Integer.valueOf(edt_edad.getText().toString());
             String telefono = edt_telefono.getText().toString();
             String correo = edt_correo.getText().toString();
             String clave = edt_clave.getText().toString();

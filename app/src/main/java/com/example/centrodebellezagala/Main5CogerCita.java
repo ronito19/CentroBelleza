@@ -10,13 +10,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.centrodebellezagala.clases.CitaDatosCompletos;
 import com.example.centrodebellezagala.clases.Citas;
+import com.example.centrodebellezagala.clases.Clientes;
 import com.example.centrodebellezagala.controladores.CitaFirebaseController;
+import com.example.centrodebellezagala.controladores.ClienteFirebaseController;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnItemSelectedListener
@@ -28,8 +39,13 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     private TextView txt_hora;
     private Spinner sp_hora;
     private FirebaseAuth mAuth;
+    private Main4Menu main4Menu;
 
-    Citas cit;
+
+
+
+    CitaDatosCompletos cit;
+    Clientes c;
 
 
 
@@ -38,6 +54,26 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     private String tratamientos;
     private String fecha;
     private String hora;
+    private String correoCliente;
+    private Clientes clienteLogeado;
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            currentUser.reload();
+        }
+        else{
+            Toast.makeText(Main5CogerCita.this, " Debes autenticarte primero ", Toast.LENGTH_SHORT).show();
+            FirebaseUser user = mAuth.getCurrentUser();
+            //updateUI(user);
+            Intent intent = new Intent(Main5CogerCita.this, Main1Logueo.class);
+            startActivity(intent);
+        }
+    }
 
 
 
@@ -48,28 +84,30 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_main5_coger_cita);
         txt_tratamientos = (TextView) findViewById(R.id.txt_tratamientos);
         sp_tratamientos = (Spinner) findViewById(R.id.sp_tratamientos);
+
         txt_fecha = (TextView) findViewById(R.id.txt_fecha);
         edt_fecha = (EditText) findViewById(R.id.edt_fecha);
         txt_hora = (TextView) findViewById(R.id.txt_hora);
         sp_hora = (Spinner) findViewById(R.id.sp_hora);
         mAuth = FirebaseAuth.getInstance();
+        clienteLogeado = (Main4Menu.clienteLogeado);
 
 
         if(sp_tratamientos != null)
         {
-            String[] tratamientos = {"<Selecciona un tipo de sesion>", " PELUQUERIA ", " MANICURA ", " PEDICURA ", " MAQUILLAJE ",
+            String[] tratamiento = {"< Selecciona un tipo de sesion >", " PELUQUERIA ", " MANICURA ", " PEDICURA ", " MAQUILLAJE ",
                                     " LIMPIEZA FACIAL ", " TRATAMIENTOS GENERALES "};
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.estilospinner, tratamientos);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.estilospinner, tratamiento);
             sp_tratamientos.setAdapter(adapter);
             sp_tratamientos.setOnItemSelectedListener(this);
         }
 
         if(sp_hora != null)
         {
-            String[] horas = {"<Selecciona una hora>", " 09:00 - 10:00 ", " 10:00 - 11:00 ", " 11:00 - 12:00 ", " 12:00 - 13:00 ",
-                            " 13:00 - 14:00 ", " 17:00 - 18:00 ", " 18:00 - 19:00 ", " 19:00 - 20:00 ", " 20:00 - 21:00 "};
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.estilospinner1, horas);
-            sp_hora.setAdapter(adapter);
+            String[] horas = {"< Selecciona una hora >", " 09:00 hrs - 10:00 hrs ", " 10:00 hrs - 11:00 hrs ", " 11:00 hrs - 12:00 hrs ", " 12:00 hrs - 13:00 hrs ",
+                            " 13:00 hrs - 14:00 hrs ", " 17:00 hrs - 18:00 hrs ", " 18:00 hrs - 19:00 hrs ", " 19:00 hrs - 20:00 hrs ", " 20:00 hrs - 21:00 hrs "};
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, R.layout.estilospinner1, horas);
+            sp_hora.setAdapter(adapter1);
             sp_hora.setOnItemSelectedListener(this);
         }
     }
@@ -78,9 +116,24 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
 
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, android.view.View view, int i, long l) {
-        tratamientos = adapterView.getItemAtPosition(i).toString();
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+    {
+        Spinner spinner = (Spinner) adapterView;
+
+        if (spinner.getId() == R.id.sp_tratamientos) {
+
+            tratamientos = adapterView.getItemAtPosition(i).toString();
+
+        } else if (spinner.getId() == R.id.sp_hora) {
+
+            hora = adapterView.getItemAtPosition(i).toString();
+
+        }
+
     }
+
+
+
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView)
@@ -101,26 +154,22 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     public void seleccionar_Fecha(int anyo, int mes, int dia)
     {
         String texto_anyo = String.valueOf(anyo);
-        String texto_mes = String.valueOf(mes);
+        String texto_mes = String.valueOf(mes + 1);
         String texto_dia = String.valueOf(dia);
         fecha = texto_dia + "/" + texto_mes + "/" + texto_anyo;
         edt_fecha.setText(fecha);
     }
 
 
-    public void guardar_Cita(View view) {
-
-
-        tratamientos = sp_tratamientos.toString();
+    public void guardar_Cita(View view)
+    {
         fecha = String.valueOf(edt_fecha.getText());
-        hora = sp_hora.toString();
-
-        cit = new Citas(tratamientos, fecha, hora);
-
+        correoCliente = mAuth.getCurrentUser().getEmail();
+        cit = new CitaDatosCompletos(correoCliente, clienteLogeado.getNombre(), clienteLogeado.getApellidos(), tratamientos, fecha, hora);
         new CitaFirebaseController().guardar_Cita(new CitaFirebaseController.CitaStatus()
         {
             @Override
-            public void citaIsLoaded(List<Citas> citas, List<String> keys)
+            public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
             {
 
             }
@@ -128,11 +177,10 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void citaIsAdd()
             {
-                // aquí hay que poner cuando se haya insertado bien qué hacer
                 Toast.makeText(Main5CogerCita.this," Cita guardada correctamente ",Toast.LENGTH_LONG).show();
+                FirebaseUser user = mAuth.getCurrentUser();
                 Intent intent = new Intent(Main5CogerCita.this, Main4Menu.class);
                 startActivity(intent);
-
             }
 
             @Override
@@ -146,7 +194,9 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
             {
 
             }
+        },cit);
 
-        }, cit);
+
+
     }
 }

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.centrodebellezagala.clases.Clientes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +24,10 @@ public class ClienteFirebaseController
     private FirebaseDatabase mDatabase;
     private DatabaseReference myRef;
     private List<Clientes> clientes;
+    private Clientes cli;
+
+
+
 
     public interface ClienteStatus
     {
@@ -30,6 +35,7 @@ public class ClienteFirebaseController
         void clienteIsAdd();
         void clienteIsUpdate();
         void clienteIsDelete();
+        void clienteIsEncontrado(Clientes cli);
     }
 
     public ClienteFirebaseController() {
@@ -59,11 +65,43 @@ public class ClienteFirebaseController
             }
         });
     }
+    //-----------------------------------------------------------------------------------
+
+
+
+    public void obtener_un_Cliente(final ClienteStatus clienteStatus, String email)
+    {
+        this.myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                clientes.clear();
+                List<String> keys = new ArrayList<String>();
+                for(DataSnapshot keynode: snapshot.getChildren())
+                {
+                    keys.add(keynode.getKey());
+                    Clientes cli = keynode.getValue(Clientes.class);
+                    if(cli.getNombre().equalsIgnoreCase(email))
+                    {
+                        clienteStatus.clienteIsEncontrado(cli);
+                        return ;
+                    }
+
+
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     //---------------------------------------------------------------------------------
-    public void insertarCliente(final ClienteStatus clienteStatus, Clientes cli)
+    public void insertarCliente(final ClienteStatus clienteStatus, Clientes cli, FirebaseAuth mAuth)
     {
-        this.myRef.push().setValue(cli).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        this.myRef.child(mAuth.getUid()).setValue(cli).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 // si todo va bien

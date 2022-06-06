@@ -86,9 +86,7 @@ public class Clientes implements Parcelable
         this.apellidos = apellidos;
     }
 
-    public Integer getEdad(Integer edad) {
-        return edad;
-    }
+    public Integer getEdad(){return edad;}
 
     public void setEdad(Integer edad) {
         this.edad = edad;

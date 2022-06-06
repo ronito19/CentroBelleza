@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center">
+
+    <ImageView
+        android:id="@+id/img_centro"
+        android:layout_width="325dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/material_dynamic_neutral80"
+        android:contentDescription="TODO"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gala" />
+
+    <ScrollView
+        android:layout_width="408dp"
+        android:layout_height="445dp"
+        android:layout_marginTop="136dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_quienessomos"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_tratamientos_qs"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Tratamientos:"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_peluqueria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PELUQUERIA"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/img_peluqueria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/peluqueria"
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/txt_manicura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MANICURA"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_manicura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_dynamic_neutral80"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/manicura"
+                tools:ignore="ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/txt_pedicura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PEDICURA"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/img_pedicura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pedicura"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/txt_maquillaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MAQUILLAJE"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/img_maquillaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/maquillaje"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/txt_limpieza_facial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LIMPIEZA  FACIAL"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/img_facial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/limpiezafacial"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/txt_tratamientos_generales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TRATAMIENTOS  GENERALES"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/img_tratamientos_generales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/tratamientos"
+                android:contentDescription="TODO" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/txt_quienessomos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Quienes somos?"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_centro" />
+
+    <TextView
+        android:id="@+id/txt_descripcion"
+        android:layout_width="329dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="40dp"
+        android:text="GALA es un centro de estética dedicado a la imagen y estética personal. Con más de 12 años de experiencia en el sector de la belleza, nuestra pasión es mejorar la salud y aspecto de las personas y sólo de este modo es como conseguimos los mejores resultados, mimamos cada detalle para que la estancia en nuestro local sea totalmente aséptica, resulte agradable y sea una experiencia placentera."
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_centro"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/img_centro"
+        app:layout_constraintTop_toBottomOf="@+id/img_centro" />
+</androidx.constraintlayout.widget.ConstraintLayout>

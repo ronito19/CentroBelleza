@@ -4,10 +4,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.centrodebellezagala.clases.CitaDatosCompletos;
 import com.example.centrodebellezagala.clases.Citas;
 import com.example.centrodebellezagala.clases.Clientes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,26 +26,31 @@ public class CitaFirebaseController
 {
     private FirebaseDatabase mDatabase;
     private DatabaseReference myRef;
-    private List<Citas> citas;
-
+    private List<CitaDatosCompletos> citas;
+    //private FirebaseAuth mAuth;
 
 
 
     public interface CitaStatus
     {
-        void citaIsLoaded(List<Citas> citas, List<String> keys);
+        void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys);
         void citaIsAdd();
         void citaIsUpdate();
         void citaIsDelete();
     }
 
-    public CitaFirebaseController() {
+
+    public CitaFirebaseController()
+    {
         this.mDatabase  = FirebaseDatabase.getInstance();
         this.myRef = mDatabase.getReference("citas");
-        this.citas  = new ArrayList<Citas>();
+        this.citas  = new ArrayList<CitaDatosCompletos>();
     }
 
-    public void obtenerCita(final CitaFirebaseController.CitaStatus citaStatus)
+
+
+
+    public void obtenerCita(final CitaStatus citaStatus)
     {
         this.myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -52,7 +60,7 @@ public class CitaFirebaseController
                 for(DataSnapshot keynode: snapshot.getChildren())
                 {
                     keys.add(keynode.getKey());
-                    Citas cit = keynode.getValue(Citas.class);
+                    CitaDatosCompletos cit = keynode.getValue(CitaDatosCompletos.class);
                     citas.add(cit);
                 }
                 citaStatus.citaIsLoaded(citas,keys);
@@ -65,7 +73,7 @@ public class CitaFirebaseController
     }
 
     //---------------------------------------------------------------------------------
-    public void guardar_Cita(final CitaStatus citaStatus, Citas cit)
+    public void guardar_Cita(final CitaStatus citaStatus, CitaDatosCompletos cit)
     {
         this.myRef.push().setValue(cit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -84,7 +92,7 @@ public class CitaFirebaseController
                 });
     }
     //---------------------------------------------------------------------------------
-    public void borrarCita(final CitaFirebaseController.CitaStatus citaStatus, String key)
+    public void borrarCita(final CitaStatus citaStatus, String key)
     {
         this.myRef.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -103,7 +111,7 @@ public class CitaFirebaseController
                 });
     }
     //---------------------------------------------------------------------------------
-    public void actualizarCita(final CitaFirebaseController.CitaStatus citaStatus, String key, Citas cit)
+    public void actualizarCita(final CitaStatus citaStatus, String key, CitaDatosCompletos cit)
     {
         Map<String, Object> nuevaCita = new HashMap<String,Object>();
         nuevaCita.put(key,cit);

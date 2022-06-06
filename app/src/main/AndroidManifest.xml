@@ -37,6 +37,21 @@
             android:exported="false">
 
         </activity>
+        <activity
+            android:name=".Main6MostrasCitas"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".Main7MostrarDetallesCitas"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".Main8Info"
+            android:exported="false">
+
+        </activity>
 
     </application>
 

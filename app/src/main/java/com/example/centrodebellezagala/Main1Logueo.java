@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
- * Clase para loguearse, si el usuario ya tiene cuenta, puede loguearse
+ * Clase para loguearse, si el usuario ya tiene cuenta, puede loguearse para poder ingresar
  * @author: Ronnie Mascaro Troncoso
  */
 public class Main1Logueo extends AppCompatActivity
@@ -73,68 +73,45 @@ public class Main1Logueo extends AppCompatActivity
 
     public void Logueate(View view)
     {
+        if(validarLogin())
+        {
+            String correo = String.valueOf(edt_correo.getText());
+            String clave = String.valueOf(edt_clave.getText());
+            mAuth.signInWithEmailAndPassword(correo, clave).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+            {
 
-        String correo = String.valueOf(edt_correo.getText());
-        String clave = String.valueOf(edt_clave.getText());
-        mAuth.signInWithEmailAndPassword(correo, clave)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task)
                 {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
+                    if (task.isSuccessful())
                     {
-
-                        if (task.isSuccessful())
-                        {
-
-                            Log.i("firebasedb", "signInWithEmail:success");
-                            Toast.makeText(Main1Logueo.this, "Logueado correctamente, ya puedes ingresar..!", Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //---------------------------------------------------------------------------------------------------------
-                            //Toast.makeText(Main1Logueo.this, "Logueado correctamente, ya puedes ingresar..!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Main1Logueo.this, Main4Menu.class);
-                            startActivity(intent);
-
-                        }
-                        else
-                        {
-
-                            Log.i("firebasedb", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(Main1Logueo.this, "La cuenta no existe, debes RESISTRARTE..!", Toast.LENGTH_SHORT).show();
-                        }
+                        Log.i("firebasedb", "signInWithEmail:success");
+                        Toast.makeText(Main1Logueo.this, "Logueado correctamente, ya puedes ingresar..!", Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        //---------------------------------------------------------------------------------------------------------
+                        //Toast.makeText(Main1Logueo.this, "Logueado correctamente, ya puedes ingresar..!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Main1Logueo.this, Main4Menu.class);
+                        startActivity(intent);
                     }
-                });
+                    else
+                    {
+                        Log.i("firebasedb", "signInWithEmail:failure", task.getException());
+                        Toast.makeText(Main1Logueo.this, "La cuenta no existe, debes RESISTRARTE..!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
 
 
     public void registrarse(View view)
     {
-            if(validarLogin())
-            {
-                String correo = String.valueOf(edt_correo.getText()).trim();
-                String clave = String.valueOf(edt_clave.getText());
-                mAuth.createUserWithEmailAndPassword(correo, clave)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.i("firebasedb", "createUserWithEmail:success");
-                                    Toast.makeText(Main1Logueo.this, " Por favor, REGISTRATE AHORA... ", Toast.LENGTH_SHORT).show();
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    //updateUI(user);
-                                    Intent intent = new Intent(Main1Logueo.this, Main2Registrarse.class);
-                                    startActivity(intent);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.i("firebasedb", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(Main1Logueo.this, "Autenticacion fallida", Toast.LENGTH_SHORT).show();
-                                    // updateUI(null);
-                                }
-                            }
-                        });
-            }
+        Toast.makeText(Main1Logueo.this, " Por favor, REGISTRATE AHORA... ", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Main1Logueo.this, Main2Registrarse.class);
+        startActivity(intent);
+
+
 
     }
 
