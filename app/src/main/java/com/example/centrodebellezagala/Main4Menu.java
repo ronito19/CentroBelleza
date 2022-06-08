@@ -30,10 +30,10 @@ public class Main4Menu extends AppCompatActivity
 {
     public TextView txt_nombre;
     public EditText edt_nombre;
-    public static Clientes clienteLogeado;
+    public static Clientes clienteLogueado;
     public FirebaseAuth mAuth;
     public String usuarioUID;
-    public String nombreUsuarioLogeado;
+    public String nombreUsuarioLogueado;
     public FirebaseUser User;
     private DatabaseReference myRef;
     public String emailUser;
@@ -61,16 +61,21 @@ public class Main4Menu extends AppCompatActivity
 
     // METODOS
 
-    private void cogerDatosUsuario(){
-        myRef.child(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+    private void cogerDatosUsuario()
+    {
+        myRef.child(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>()
+        {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
+            public void onComplete(@NonNull Task<DataSnapshot> task)
+            {
+                if (!task.isSuccessful())
+                {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
-                else {
-                    clienteLogeado = task.getResult().getValue(Clientes.class);
-                    txt_nombre.setText(" Hola " + clienteLogeado.getNombre() + " " + clienteLogeado.getApellidos());
+                else
+                {
+                    clienteLogueado = task.getResult().getValue(Clientes.class);
+                    txt_nombre.setText(" Hola... " + clienteLogueado.getNombre() + " " + clienteLogueado.getApellidos());
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                 }
             }

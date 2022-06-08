@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CitaDatosCompletos implements Parcelable
+public class CitaDatosCompletos implements Serializable
 {
     private String correoCliente;
     private String nombre;
@@ -122,48 +122,5 @@ public class CitaDatosCompletos implements Parcelable
                 '}';
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.correoCliente);
-        dest.writeString(this.nombre);
-        dest.writeString(this.apellidos);
-        dest.writeString(this.tratamientos);
-        dest.writeString(this.fecha);
-        dest.writeString(this.hora);
-    }
-
-    public void readFromParcel(Parcel source) {
-        this.correoCliente = source.readString();
-        this.nombre = source.readString();
-        this.apellidos = source.readString();
-        this.tratamientos = source.readString();
-        this.fecha = source.readString();
-        this.hora = source.readString();
-    }
-
-    protected CitaDatosCompletos(Parcel in) {
-        this.correoCliente = in.readString();
-        this.nombre = in.readString();
-        this.apellidos = in.readString();
-        this.tratamientos = in.readString();
-        this.fecha = in.readString();
-        this.hora = in.readString();
-    }
-
-    public static final Creator<CitaDatosCompletos> CREATOR = new Creator<CitaDatosCompletos>() {
-        @Override
-        public CitaDatosCompletos createFromParcel(Parcel source) {
-            return new CitaDatosCompletos(source);
-        }
-
-        @Override
-        public CitaDatosCompletos[] newArray(int size) {
-            return new CitaDatosCompletos[size];
-        }
-    };
 }

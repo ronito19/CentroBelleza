@@ -55,7 +55,7 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     private String fecha;
     private String hora;
     private String correoCliente;
-    private Clientes clienteLogeado;
+    private Clientes clienteLogueado;
 
 
     @Override
@@ -90,7 +90,7 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
         txt_hora = (TextView) findViewById(R.id.txt_hora);
         sp_hora = (Spinner) findViewById(R.id.sp_hora);
         mAuth = FirebaseAuth.getInstance();
-        clienteLogeado = (Main4Menu.clienteLogeado);
+        clienteLogueado = (Main4Menu.clienteLogueado);
 
 
         if(sp_tratamientos != null)
@@ -165,7 +165,7 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     {
         fecha = String.valueOf(edt_fecha.getText());
         correoCliente = mAuth.getCurrentUser().getEmail();
-        cit = new CitaDatosCompletos(correoCliente, clienteLogeado.getNombre(), clienteLogeado.getApellidos(), tratamientos, fecha, hora);
+        cit = new CitaDatosCompletos(correoCliente, clienteLogueado.getNombre(), clienteLogueado.getApellidos(), tratamientos, fecha, hora);
         new CitaFirebaseController().guardar_Cita(new CitaFirebaseController.CitaStatus()
         {
             @Override
