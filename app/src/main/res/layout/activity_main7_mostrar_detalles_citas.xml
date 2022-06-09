@@ -17,6 +17,7 @@
         android:inputType="textPersonName"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -34,6 +35,7 @@
         android:inputType="textPersonName"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edt_detalles_correo"
         app:layout_constraintHorizontal_bias="0.497"
@@ -51,6 +53,7 @@
         android:inputType="textPersonName"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edt_detalles_nombre"
         app:layout_constraintHorizontal_bias="0.497"
@@ -71,6 +74,7 @@
         android:onClick="escoger_fecha"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/sp_detalles_tratamiento"
         app:layout_constraintStart_toStartOf="@+id/sp_detalles_tratamiento"
@@ -95,6 +99,7 @@
         android:layout_marginTop="15dp"
         android:onClick="borrar_cita"
         android:text="BORRAR  CITA"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_detalles_foto_cita" />
@@ -106,6 +111,7 @@
         android:layout_marginEnd="25dp"
         android:onClick="actualizar_cita"
         android:text="ACTUALIZAR  CITA"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -118,6 +124,7 @@
         android:layout_marginEnd="72dp"
         android:onClick="salir"
         android:text="SALIR"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
@@ -155,6 +162,7 @@
         android:layout_marginStart="72dp"
         android:onClick="atras"
         android:text="ATRAS"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent" />
