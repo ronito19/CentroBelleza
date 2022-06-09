@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:padding="5dp"
-    app:cardBackgroundColor="@color/teal_200">
+    app:cardBackgroundColor="@color/teal_700">
 
 
     <LinearLayout
@@ -33,9 +33,9 @@
             <TextView
                 android:id="@+id/txt_rv_cita_correo"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:text="CORREO:"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
@@ -43,7 +43,7 @@
                 android:id="@+id/txt_rv_cita_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="Nombre:"
+                android:text="NOMBRE:"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
@@ -52,7 +52,7 @@
                 android:id="@+id/txt_rv_cita_apellidos"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Apellidos:"
+                android:text="APELLIDOS:"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
@@ -61,7 +61,7 @@
                 android:id="@+id/txt_rv_cita_tratamiento"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:text="Tratamiento:"
+                android:text="TRATAMIENTO:"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
@@ -70,7 +70,7 @@
                 android:id="@+id/txt_rv_cita_dia"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="Dia:"
+                android:text="DIA:"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
@@ -79,7 +79,7 @@
                 android:id="@+id/txt_rv_cita_hora"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="Hora:"
+                android:text="HORA:"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />

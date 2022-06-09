@@ -36,15 +36,10 @@ import java.util.List;
 
 public class Main2Registrarse extends AppCompatActivity
 {
-    private EditText edt_nombre;
-    private EditText edt_apellidos;
-    private EditText edt_edad;
-    private EditText edt_telefono;
-    private EditText edt_correo;
-    private EditText edt_clave;
-    private Button bt_registrarse;
+    private EditText edt_nombre, edt_apellidos, edt_edad, edt_telefono, edt_correo, edt_clave;
     private ImageView img_registrarse;
     private FirebaseAuth mAuth;
+
 
 
     Clientes cli;
@@ -195,39 +190,32 @@ public class Main2Registrarse extends AppCompatActivity
         {
             boolean retorno = true;
 
-            String nombre = edt_nombre.getText().toString();
-            String apellidos = edt_apellidos.getText().toString();
-            Integer edad = Integer.valueOf(edt_edad.getText().toString());
-            String telefono = edt_telefono.getText().toString();
-            String correo = edt_correo.getText().toString();
-            String clave = edt_clave.getText().toString();
-
-            if(nombre.isEmpty())
+            if(edt_nombre.getText().toString().isEmpty())
             {
                 edt_nombre.setError(" Debes rellenar este campo ");
                 retorno = false;
             }
-            if(apellidos.isEmpty())
+            if(edt_apellidos.getText().toString().isEmpty())
             {
                 edt_apellidos.setError(" Debes rellenar este campo ");
                 retorno = false;
             }
-            if(edad == 0)
+            if(edt_edad.getText().toString().equals(""))
             {
                 edt_edad.setError(" Debes rellenar este campo ");
                 retorno = false;
             }
-            if(telefono.isEmpty())
+            if(edt_telefono.getText().toString().isEmpty())
             {
                 edt_telefono.setError(" Debes rellenar este campo ");
                 retorno = false;
             }
-            if(correo.isEmpty())
+            if(edt_correo.getText().toString().isEmpty())
             {
                 edt_correo.setError(" Debes rellenar este campo ");
                 retorno = false;
             }
-            if(clave.isEmpty())
+            if(edt_clave.getText().toString().isEmpty())
             {
                 edt_clave.setError(" Debes rellenar este campo ");
                 retorno = false;

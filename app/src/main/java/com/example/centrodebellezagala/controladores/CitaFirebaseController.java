@@ -48,8 +48,6 @@ public class CitaFirebaseController
     }
 
 
-    //public void obtenerCitaUsuario(){}
-
 
 
 

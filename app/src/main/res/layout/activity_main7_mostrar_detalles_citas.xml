@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/teal_700">
 
     <EditText
         android:id="@+id/edt_detalles_correo"
@@ -14,6 +15,9 @@
         android:hint="Correo"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,10 +28,13 @@
         android:id="@+id/edt_detalles_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edt_detalles_correo"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/edt_detalles_correo"
@@ -38,10 +45,13 @@
         android:id="@+id/edt_detalles_apellidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Apellidos"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edt_detalles_nombre"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/edt_detalles_nombre"
@@ -49,63 +59,43 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/edt_detalles_tratamiento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="Tratamiento"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/edt_detalles_apellidos"
-        app:layout_constraintStart_toStartOf="@+id/edt_detalles_apellidos"
-        app:layout_constraintTop_toBottomOf="@+id/edt_detalles_apellidos"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
         android:id="@+id/edt_detalles_fecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_width="223dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="20dp"
+        android:drawableBottom="@android:drawable/ic_menu_my_calendar"
         android:ems="10"
+        android:focusableInTouchMode="false"
         android:hint="Fecha"
         android:inputType="date"
-        app:layout_constraintEnd_toEndOf="@+id/edt_detalles_tratamiento"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/edt_detalles_tratamiento"
-        app:layout_constraintTop_toBottomOf="@+id/edt_detalles_tratamiento"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/edtr_detalles_hora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="Hora"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="@+id/edt_detalles_fecha"
-        app:layout_constraintStart_toStartOf="@+id/edt_detalles_fecha"
-        app:layout_constraintTop_toBottomOf="@+id/edt_detalles_fecha"
+        android:onClick="escoger_fecha"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/sp_detalles_tratamiento"
+        app:layout_constraintStart_toStartOf="@+id/sp_detalles_tratamiento"
+        app:layout_constraintTop_toBottomOf="@+id/sp_detalles_tratamiento"
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/img_detalles_foto_cita"
         android:layout_width="125dp"
         android:layout_height="88dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtr_detalles_hora"
+        app:layout_constraintTop_toBottomOf="@+id/sp_detalles_hora"
         app:srcCompat="@drawable/programado" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
         android:onClick="borrar_cita"
         android:text="BORRAR  CITA"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_detalles_foto_cita" />
 
@@ -113,9 +103,10 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="25dp"
         android:onClick="actualizar_cita"
         android:text="ACTUALIZAR  CITA"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -123,13 +114,48 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="72dp"
         android:onClick="salir"
         android:text="SALIR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/img_detalles_foto_cita"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="@+id/img_detalles_foto_cita"
-        app:layout_constraintTop_toBottomOf="@+id/img_detalles_foto_cita"
-        app:layout_constraintVertical_bias="0.133" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+    <Spinner
+        android:id="@+id/sp_detalles_tratamiento"
+        android:layout_width="347dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/edt_detalles_apellidos"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toStartOf="@+id/edt_detalles_apellidos"
+        app:layout_constraintTop_toBottomOf="@+id/edt_detalles_apellidos"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <Spinner
+        android:id="@+id/sp_detalles_hora"
+        android:layout_width="354dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/edt_detalles_fecha"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="@+id/edt_detalles_fecha"
+        app:layout_constraintTop_toBottomOf="@+id/edt_detalles_fecha"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:onClick="atras"
+        android:text="ATRAS"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button4"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

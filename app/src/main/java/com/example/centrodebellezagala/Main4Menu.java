@@ -29,15 +29,13 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Main4Menu extends AppCompatActivity
 {
     public TextView txt_nombre;
-    public EditText edt_nombre;
     public static Clientes clienteLogueado;
-    public FirebaseAuth mAuth;
-    public String usuarioUID;
-    public String nombreUsuarioLogueado;
+    public String usuarioUID, emailUser;
     public FirebaseUser User;
-    private DatabaseReference myRef;
-    public String emailUser;
+    public FirebaseAuth mAuth;
     private FirebaseDatabase db;
+    private DatabaseReference myRef;
+
 
 
     protected void onCreate(Bundle savedInstanceState)
@@ -99,7 +97,7 @@ public class Main4Menu extends AppCompatActivity
     //Metodo que nos dirige a ver nuestras citas
     public void ver_cita(View view)
     {
-        Intent intent = new Intent(Main4Menu.this, Main6MostrasCitas.class);
+        Intent intent = new Intent(this, Main6MostrasCitas.class);
         startActivity(intent);
     }
 
@@ -107,7 +105,7 @@ public class Main4Menu extends AppCompatActivity
     //Metodo que nos dirige a ver informacion sobre el centro de belleza
     public void tu_conocenos(View view)
     {
-        Intent intent = new Intent(Main4Menu.this, Main8Info.class);
+        Intent intent = new Intent(this, Main8Info.class);
         startActivity(intent);
     }
 
@@ -116,7 +114,7 @@ public class Main4Menu extends AppCompatActivity
     public void ir_a_la_salida(View view)
     {
         mAuth.signOut();
-        Intent intent = new Intent(Main4Menu.this, Main1Logueo.class);
+        Intent intent = new Intent(this, Main1Logueo.class);
         startActivity(intent);
         this.finish();
     }

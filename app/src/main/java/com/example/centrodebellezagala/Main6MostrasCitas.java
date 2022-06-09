@@ -27,17 +27,21 @@ public class Main6MostrasCitas extends AppCompatActivity
     private ArrayList<CitaDatosCompletos> citas;
     private ArrayList<String> keys;
     private FirebaseAuth mAuth;
+    private ArrayList<CitaDatosCompletos> misCitas;
 
 
     @Override
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if(currentUser != null)
+        {
             currentUser.reload();
         }
-        else{
+        else
+        {
             Toast.makeText(Main6MostrasCitas.this, " Debes autenticarte primero ", Toast.LENGTH_SHORT).show();
             FirebaseUser user = mAuth.getCurrentUser();
             //updateUI(user);
@@ -56,35 +60,83 @@ public class Main6MostrasCitas extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         rv_citas = findViewById(R.id.rv_citas);
         mAdapter = new ListaCitasAdapter(this);
-        new CitaFirebaseController().obtenerCita(new CitaFirebaseController.CitaStatus()
+
+        if(mAuth.getCurrentUser().getEmail().equalsIgnoreCase("administrador@gmail.com"))
         {
-
-            @Override
-            public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+            new CitaFirebaseController().obtenerCita(new CitaFirebaseController.CitaStatus()
             {
-                mAdapter.setListaCitas(citas);
-                mAdapter.setKeys(keys);
-            }
 
-            @Override
-            public void citaIsAdd() {
+                @Override
+                public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+                {
+                    mAdapter.setListaCitas(citas);
+                    mAdapter.setKeys(keys);
+                }
 
-            }
+                @Override
+                public void citaIsAdd()
+                {
 
-            @Override
-            public void citaIsUpdate() {
+                }
 
-            }
+                @Override
+                public void citaIsUpdate()
+                {
 
-            @Override
-            public void citaIsDelete() {
+                }
 
-            }
+                @Override
+                public void citaIsDelete()
+                {
+
+                }
 
 
-        });
+            });
+        }
+        else
+        {
+            new CitaFirebaseController().obtenerCita(new CitaFirebaseController.CitaStatus()
+            {
 
-        //------------------------------------------------------------
+                @Override
+                public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+                {
+                    List<CitaDatosCompletos> misCitas = new ArrayList<CitaDatosCompletos>();
+                    for (CitaDatosCompletos c: citas)
+                    {
+                        if(c.getCorreoCliente().equalsIgnoreCase(mAuth.getCurrentUser().getEmail()))
+                        {
+                            misCitas.add(c);
+                        }
+                    }
+                    mAdapter.setListaCitas(misCitas);
+                    mAdapter.setKeys(keys);
+                }
+
+                @Override
+                public void citaIsAdd()
+                {
+
+                }
+
+                @Override
+                public void citaIsUpdate()
+                {
+
+                }
+
+                @Override
+                public void citaIsDelete()
+                {
+
+                }
+
+
+            });
+        }
+
+        //----------------------------------------------------------------------------------------
         rv_citas.setAdapter(mAdapter);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
         {
@@ -100,9 +152,16 @@ public class Main6MostrasCitas extends AppCompatActivity
 
     public void salir(View view)
     {
-        Intent intent = new Intent(Main6MostrasCitas.this, Main1Logueo.class);
+        Intent intent = new Intent(this, Main1Logueo.class);
         startActivity(intent);
         FirebaseAuth.getInstance().signOut();
+    }
+
+
+    public void atras(View view)
+    {
+        Intent intent = new Intent(this, Main4Menu.class);
+        startActivity(intent);
     }
 
 

@@ -27,7 +27,7 @@ import android.widget.Toast;
 
         public void ir_al_menu_principal(View view)
         {
-            Toast.makeText(Main3Bienvenida.this, " Bienvenido al menu principal ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, " Bienvenido al menu principal ", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, Main4Menu.class);
             startActivity(intent);
 

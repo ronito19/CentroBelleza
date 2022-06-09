@@ -26,8 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Main1Logueo extends AppCompatActivity
 {
 
-    private EditText edt_correo = null;
-    private EditText edt_clave = null;
+    private EditText edt_correo, edt_clave;
     private FirebaseAuth mAuth;
 
 
@@ -64,7 +63,7 @@ public class Main1Logueo extends AppCompatActivity
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null)
         {
-            Intent intent = new Intent(Main1Logueo.this,Main4Menu.class);
+            Intent intent = new Intent(this,Main4Menu.class);
             startActivity(intent);
             finish();
         }
@@ -120,15 +119,12 @@ public class Main1Logueo extends AppCompatActivity
     {
         boolean retorno = true;
 
-        String correo = edt_correo.getText().toString();
-        String clave = edt_clave.getText().toString();
-
-        if(correo.isEmpty())
+        if(edt_correo.getText().toString().isEmpty())
         {
             edt_correo.setError(" Debes rellenar este campo ");
             retorno = false;
         }
-        if(clave.isEmpty())
+        if(edt_clave.getText().toString().isEmpty())
         {
             edt_clave.setError(" Debes rellenar este campo ");
             retorno = false;

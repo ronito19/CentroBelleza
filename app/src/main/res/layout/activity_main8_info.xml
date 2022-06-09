@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/teal_200"
     android:textAlignment="center">
 
     <ImageView
@@ -11,16 +12,18 @@
         android:layout_width="325dp"
         android:layout_height="150dp"
         android:layout_marginTop="16dp"
-        android:background="@color/material_dynamic_neutral80"
+        android:background="@color/teal_700"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gala" />
+        app:srcCompat="@drawable/gala"
+        tools:ignore="ImageContrastCheck" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="408dp"
-        android:layout_height="445dp"
+        android:layout_height="484dp"
         android:layout_marginTop="136dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
@@ -30,7 +33,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:orientation="vertical">
 
             <TextView
@@ -39,41 +42,68 @@
                 android:layout_height="40dp"
                 android:text="Tratamientos:"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/txt_peluqueria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:text="PELUQUERIA"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
             <ImageButton
                 android:id="@+id/img_peluqueria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/teal_700"
                 android:contentDescription="TODO"
+                android:textAlignment="center"
                 app:srcCompat="@drawable/peluqueria"
                 tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/txt_colorimetriadelcabello"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="COLORIMETRIA  DEL  CABELLO"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
+
+            <ImageView
+                android:id="@+id/img_colorimetriadelcabello"
+                android:layout_width="match_parent"
+                android:layout_height="193dp"
+                android:background="@color/teal_700"
+                android:textAlignment="center"
+                app:srcCompat="@drawable/colorimetria" />
 
             <TextView
                 android:id="@+id/txt_manicura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:text="MANICURA"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
             <ImageView
                 android:id="@+id/img_manicura"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/material_dynamic_neutral80"
+                android:layout_height="181dp"
+                android:background="@color/teal_700"
                 android:contentDescription="TODO"
+                android:textAlignment="center"
                 app:srcCompat="@drawable/manicura"
                 tools:ignore="ImageContrastCheck" />
 
@@ -81,66 +111,108 @@
                 android:id="@+id/txt_pedicura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:text="PEDICURA"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
             <ImageButton
                 android:id="@+id/img_pedicura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/teal_700"
+                android:contentDescription="TODO"
+                android:textAlignment="center"
                 app:srcCompat="@drawable/pedicura"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/txt_maquillaje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:text="MAQUILLAJE"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
             <ImageButton
                 android:id="@+id/img_maquillaje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/maquillaje"
-                android:contentDescription="TODO" />
+                android:background="@color/teal_700"
+                android:contentDescription="TODO"
+                android:textAlignment="center"
+                app:srcCompat="@drawable/maquillaje" />
 
             <TextView
                 android:id="@+id/txt_limpieza_facial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:text="LIMPIEZA  FACIAL"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
             <ImageButton
                 android:id="@+id/img_facial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/limpiezafacial"
-                android:contentDescription="TODO" />
+                android:background="@color/teal_700"
+                android:contentDescription="TODO"
+                android:textAlignment="center"
+                app:srcCompat="@drawable/limpiezafacial" />
+
+            <TextView
+                android:id="@+id/txt_aplicaciondepestanas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="APLICACION  DE  PESTAÑAS"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
+
+            <ImageView
+                android:id="@+id/img_aplicaciondepestanas"
+                android:layout_width="match_parent"
+                android:layout_height="181dp"
+                android:background="@color/teal_700"
+                app:srcCompat="@drawable/pestanas" />
 
             <TextView
                 android:id="@+id/txt_tratamientos_generales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TRATAMIENTOS  GENERALES"
+                android:background="@color/white"
+                android:text="TRATAMIENTOS  CORPORALES"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold|italic" />
 
             <ImageButton
                 android:id="@+id/img_tratamientos_generales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/tratamientos"
-                android:contentDescription="TODO" />
+                android:background="@color/teal_700"
+                android:contentDescription="TODO"
+                android:textAlignment="center"
+                app:srcCompat="@drawable/tratamientos" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/white"
+                android:textSize="20sp" />
+
         </LinearLayout>
     </ScrollView>
 
@@ -148,23 +220,50 @@
         android:id="@+id/txt_quienessomos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Quienes somos?"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_centro" />
 
     <TextView
         android:id="@+id/txt_descripcion"
-        android:layout_width="329dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="341dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/white"
         android:text="GALA es un centro de estética dedicado a la imagen y estética personal. Con más de 12 años de experiencia en el sector de la belleza, nuestra pasión es mejorar la salud y aspecto de las personas y sólo de este modo es como conseguimos los mejores resultados, mimamos cada detalle para que la estancia en nuestro local sea totalmente aséptica, resulte agradable y sea una experiencia placentera."
-        android:textSize="13sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/img_centro"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/img_centro"
         app:layout_constraintTop_toBottomOf="@+id/img_centro" />
+
+    <Button
+        android:id="@+id/bt_salir8"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="512dp"
+        android:layout_marginEnd="50dp"
+        android:onClick="salir8"
+        android:text="SALIR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_descripcion" />
+
+    <Button
+        android:id="@+id/bt_atras8"
+        android:layout_width="130dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="50dp"
+        android:onClick="atras8"
+        android:text="ATRAS"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/bt_salir8"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

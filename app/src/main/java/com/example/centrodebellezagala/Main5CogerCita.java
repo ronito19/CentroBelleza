@@ -32,17 +32,10 @@ import java.util.List;
 
 public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-    private TextView txt_tratamientos;
-    private Spinner sp_tratamientos;
-    private TextView txt_fecha;
+    private TextView txt_tratamientos, txt_fecha, txt_hora;
+    private Spinner sp_tratamientos, sp_hora;
     private EditText edt_fecha;
-    private TextView txt_hora;
-    private Spinner sp_hora;
     private FirebaseAuth mAuth;
-    private Main4Menu main4Menu;
-
-
-
 
     CitaDatosCompletos cit;
     Clientes c;
@@ -51,10 +44,7 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
 
     // Recoger variables a nivel de clase
 
-    private String tratamientos;
-    private String fecha;
-    private String hora;
-    private String correoCliente;
+    private String tratamientos, fecha, hora, correoCliente;
     private Clientes clienteLogueado;
 
 
@@ -95,8 +85,8 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
 
         if(sp_tratamientos != null)
         {
-            String[] tratamiento = {"< Selecciona un tipo de sesion >", " PELUQUERIA ", " MANICURA ", " PEDICURA ", " MAQUILLAJE ",
-                                    " LIMPIEZA FACIAL ", " TRATAMIENTOS GENERALES "};
+            String[] tratamiento = {"< Selecciona un tipo de sesion >", " PELUQUERIA ", " COLORIMETRIA DE CABELLO ", " MANICURA ", " PEDICURA ",
+                                    " MAQUILLAJE ", " LIMPIEZA FACIAL ", " APLICACION DE PESTAÑAS ", " TRATAMIENTOS CORPORALES "};
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.estilospinner, tratamiento);
             sp_tratamientos.setAdapter(adapter);
             sp_tratamientos.setOnItemSelectedListener(this);
@@ -120,14 +110,13 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     {
         Spinner spinner = (Spinner) adapterView;
 
-        if (spinner.getId() == R.id.sp_tratamientos) {
-
+        if (spinner.getId() == R.id.sp_tratamientos)
+        {
             tratamientos = adapterView.getItemAtPosition(i).toString();
-
-        } else if (spinner.getId() == R.id.sp_hora) {
-
+        }
+        else if (spinner.getId() == R.id.sp_hora)
+        {
             hora = adapterView.getItemAtPosition(i).toString();
-
         }
 
     }
@@ -163,40 +152,62 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
 
     public void guardar_Cita(View view)
     {
-        fecha = String.valueOf(edt_fecha.getText());
-        correoCliente = mAuth.getCurrentUser().getEmail();
-        cit = new CitaDatosCompletos(correoCliente, clienteLogueado.getNombre(), clienteLogueado.getApellidos(), tratamientos, fecha, hora);
-        new CitaFirebaseController().guardar_Cita(new CitaFirebaseController.CitaStatus()
+        if(guardarCitaValidacion())
         {
-            @Override
-            public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
-            {
+            fecha = String.valueOf(edt_fecha.getText());
+            correoCliente = mAuth.getCurrentUser().getEmail();
+            cit = new CitaDatosCompletos(correoCliente, clienteLogueado.getNombre(), clienteLogueado.getApellidos(), tratamientos, fecha, hora);
+            new CitaFirebaseController().guardar_Cita(new CitaFirebaseController.CitaStatus() {
+                @Override
+                public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys) {
 
-            }
+                }
 
-            @Override
-            public void citaIsAdd()
-            {
-                Toast.makeText(Main5CogerCita.this," Cita guardada correctamente ",Toast.LENGTH_LONG).show();
-                FirebaseUser user = mAuth.getCurrentUser();
-                Intent intent = new Intent(Main5CogerCita.this, Main4Menu.class);
-                startActivity(intent);
-            }
+                @Override
+                public void citaIsAdd() {
+                    Toast.makeText(Main5CogerCita.this, " Cita guardada correctamente ", Toast.LENGTH_LONG).show();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    Intent intent = new Intent(Main5CogerCita.this, Main4Menu.class);
+                    startActivity(intent);
+                }
 
-            @Override
-            public void citaIsUpdate()
-            {
+                @Override
+                public void citaIsUpdate() {
 
-            }
+                }
 
-            @Override
-            public void citaIsDelete()
-            {
+                @Override
+                public void citaIsDelete() {
 
-            }
-        },cit);
+                }
+            }, cit);
+        }
 
 
 
     }
+
+
+    private boolean guardarCitaValidacion()
+    {
+        boolean retorno = true;
+
+        if (sp_tratamientos.getSelectedItemPosition() == 0)
+        {
+            Toast.makeText(Main5CogerCita.this, "Debes seleccionar una sesion ", Toast.LENGTH_LONG).show();
+        }
+        if(edt_fecha.getText().toString().isEmpty())
+        {
+            edt_fecha.setError(" Debes elegir una fecha ");
+            retorno = false;
+        }
+        if (sp_hora.getSelectedItemPosition() == 0)
+        {
+            Toast.makeText(Main5CogerCita.this, "Debes seleccionar una hora ", Toast.LENGTH_LONG).show();
+        }
+
+        return retorno;
+    }
+
+
 }
