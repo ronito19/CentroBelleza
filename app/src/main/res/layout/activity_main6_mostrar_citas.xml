@@ -41,6 +41,8 @@
         android:layout_height="50dp"
         android:onClick="salir"
         android:text="SALIR"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.811"
@@ -55,6 +57,8 @@
         android:layout_marginStart="52dp"
         android:onClick="atras"
         android:text="ATRAS"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/bt_salirm"
         app:layout_constraintStart_toStartOf="parent" />
 
