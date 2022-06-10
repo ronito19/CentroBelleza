@@ -21,6 +21,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
+
+/**
+ * Clase donde podemos editar, borrar y actualizar las citas de los clientes
+ * @autor: Ronnie Mascaro Troncoso
+ */
+
+
+
 public class Main7MostrarDetallesCitas extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private EditText edt_detalles_correo, edt_detalles_nombre, edt_detalles_apellidos, edt_detalles_fecha;

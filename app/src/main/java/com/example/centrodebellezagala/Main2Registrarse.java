@@ -31,12 +31,12 @@ import java.util.List;
 
 /**
  * Clase para registrarse, si el usuario no tiene cuenta, puede guardar sus datos
- * @author: Ronnie Mascaro Troncoso
+ * @autor: Ronnie Mascaro Troncoso
  */
 
 public class Main2Registrarse extends AppCompatActivity
 {
-    private EditText edt_nombre, edt_apellidos, edt_edad, edt_telefono, edt_correo, edt_clave;
+    private EditText edt_nombre, edt_apellidos, edt_edad, edt_telefono, edt_correo, edt_clave1, edt_clave2;
     private ImageView img_registrarse;
     private FirebaseAuth mAuth;
 
@@ -82,7 +82,8 @@ public class Main2Registrarse extends AppCompatActivity
         edt_edad = (EditText) findViewById(R.id.edt_edad);
         edt_telefono = (EditText) findViewById(R.id.edt_telefono);
         edt_correo = (EditText) findViewById(R.id.edt_correo1);
-        edt_clave = (EditText) findViewById(R.id.edt_clave1);
+        edt_clave1 = (EditText) findViewById(R.id.edt_clave1);
+        edt_clave2 = (EditText) findViewById(R.id.edt_clave2);
         img_registrarse = (ImageView) findViewById(R.id.img_registrarse);
         mAuth = FirebaseAuth.getInstance();
 
@@ -100,8 +101,10 @@ public class Main2Registrarse extends AppCompatActivity
             Integer edad = Integer.parseInt(String.valueOf(edt_edad.getText()));
             String telefono = String.valueOf(edt_telefono.getText());
             String correo = String.valueOf(edt_correo.getText()).trim();
-            String clave = String.valueOf(edt_clave.getText());
-            mAuth.createUserWithEmailAndPassword(correo, clave).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+            String clave1 = String.valueOf(edt_clave1.getText());
+            String clave2 = String.valueOf(edt_clave2.getText());
+
+            mAuth.createUserWithEmailAndPassword(correo, clave1).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
             {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task)
@@ -130,11 +133,11 @@ public class Main2Registrarse extends AppCompatActivity
 
                             }, email, img_registrarse);
 
-                            cli = new Clientes(nombre, apellidos, edad, telefono, correo, clave, email + "/" + ".png");
+                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,  email + "/" + ".png");
                         }
                         else
                         {
-                            cli = new Clientes(nombre, apellidos, edad, telefono, correo, clave, null);
+                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,  null);
                         }
                         new ClienteFirebaseController().insertarCliente(new ClienteFirebaseController.ClienteStatus()
                         {
@@ -192,7 +195,7 @@ public class Main2Registrarse extends AppCompatActivity
 
             if(edt_nombre.getText().toString().isEmpty())
             {
-                edt_nombre.setError(" Debes rellenar este campo ");
+                edt_nombre.setError(" Ingresa un nombre valido ");
                 retorno = false;
             }
             if(edt_apellidos.getText().toString().isEmpty())
@@ -205,19 +208,24 @@ public class Main2Registrarse extends AppCompatActivity
                 edt_edad.setError(" Debes rellenar este campo ");
                 retorno = false;
             }
-            if(edt_telefono.getText().toString().isEmpty())
+            if(edt_telefono.getText().toString().isEmpty() || edt_telefono.length() < 9)
             {
-                edt_telefono.setError(" Debes rellenar este campo ");
+                edt_telefono.setError(" Debes rellenar este campo con 9 caracteres ");
                 retorno = false;
             }
-            if(edt_correo.getText().toString().isEmpty())
+            if(edt_correo.getText().toString().isEmpty() || !edt_correo.getText().toString().contains("@"))
             {
-                edt_correo.setError(" Debes rellenar este campo ");
+                edt_correo.setError(" Debes rellenar este campo con un correo valido ");
                 retorno = false;
             }
-            if(edt_clave.getText().toString().isEmpty())
+            if(edt_clave1.getText().toString().isEmpty() || edt_clave1.length() < 6)
             {
-                edt_clave.setError(" Debes rellenar este campo ");
+                edt_clave1.setError(" Debes rellenar este campo con 6 caracteres ");
+                retorno = false;
+            }
+            if(edt_clave2.getText().toString().isEmpty()  || !(edt_clave2.getText().toString().equals(edt_clave1.getText().toString())))
+            {
+                edt_clave2.setError(" Clave no valida, no coincide ");
                 retorno = false;
             }
 

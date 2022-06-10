@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
- * Clase que muestra el menu de la aplicacion para usuarios ya registrados
+ * Clase que muestra el menu principal de la aplicacion para usuarios ya registrados
  * @autor: Ronnie Mascaro Troncoso
  */
 

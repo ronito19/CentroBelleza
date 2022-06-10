@@ -3,9 +3,10 @@ package com.example.centrodebellezagala.clases;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Clientes implements Parcelable
+public class Clientes implements Serializable
 {
 
     private String nombre;
@@ -13,7 +14,8 @@ public class Clientes implements Parcelable
     private Integer edad;
     private String telefono;
     private String correo;
-    private String clave;
+    private String clave1;
+    private String clave2;
     private String foto;
     //-----------------------------------------------------------------------------------------
 
@@ -25,19 +27,32 @@ public class Clientes implements Parcelable
         this.edad = 0;
         this.telefono = "";
         this.correo = "";
-        this.clave = "";
+        this.clave1 = "";
+        this.clave2 = "";
         this.foto = null;
     }
 
 
-    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave)
+    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave1, String clave2)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
         this.telefono = telefono;
         this.correo = correo;
-        this.clave = clave;
+        this.clave1 = clave1;
+        this.clave2 = clave2;
+        this.foto = null;
+    }
+
+
+    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String foto)
+    {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.edad = edad;
+        this.telefono = telefono;
+        this.correo = correo;
         this.foto = null;
     }
 
@@ -49,20 +64,24 @@ public class Clientes implements Parcelable
         this.edad = 0;
         this.telefono = "";
         this.correo = "";
-        this.clave = "";
+        this.clave1 = "";
+        this.clave2 = "";
         this.foto = null;
     }
 
 
-    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave, String foto) {
+    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave1, String clave2, String foto) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
         this.telefono = telefono;
         this.correo = correo;
-        this.clave = clave;
+        this.clave1 = clave1;
+        this.clave2 = clave2;
         this.foto = foto;
     }
+
+
     //--------------------------------------------------------------------------------------
 
 
@@ -108,12 +127,20 @@ public class Clientes implements Parcelable
         this.correo = correo;
     }
 
-    public String getClave() {
-        return clave;
+    public String getClave1() {
+        return clave1;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setClave1(String clave1) {
+        this.clave1 = clave1;
+    }
+
+    public String getClave2() {
+        return clave2;
+    }
+
+    public void setClave2(String clave2) {
+        this.clave2 = clave2;
     }
 
     public String getFoto() {
@@ -149,56 +176,11 @@ public class Clientes implements Parcelable
                 ", edad=" + edad +
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
-                ", clave='" + clave + '\'' +
+                ", clave1='" + clave1 + '\'' +
+                ", clave2='" + clave2 + '\'' +
                 ", foto='" + foto + '\'' +
                 '}';
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.nombre);
-        dest.writeString(this.apellidos);
-        dest.writeValue(this.edad);
-        dest.writeString(this.telefono);
-        dest.writeString(this.correo);
-        dest.writeString(this.clave);
-        dest.writeString(this.foto);
-    }
-
-    public void readFromParcel(Parcel source) {
-        this.nombre = source.readString();
-        this.apellidos = source.readString();
-        this.edad = (Integer) source.readValue(Integer.class.getClassLoader());
-        this.telefono = source.readString();
-        this.correo = source.readString();
-        this.clave = source.readString();
-        this.foto = source.readString();
-    }
-
-    protected Clientes(Parcel in) {
-        this.nombre = in.readString();
-        this.apellidos = in.readString();
-        this.edad = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.telefono = in.readString();
-        this.correo = in.readString();
-        this.clave = in.readString();
-        this.foto = in.readString();
-    }
-
-    public static final Creator<Clientes> CREATOR = new Creator<Clientes>() {
-        @Override
-        public Clientes createFromParcel(Parcel source) {
-            return new Clientes(source);
-        }
-
-        @Override
-        public Clientes[] newArray(int size) {
-            return new Clientes[size];
-        }
-    };
 }

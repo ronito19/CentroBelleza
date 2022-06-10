@@ -20,9 +20,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
- * Clase para loguearse, si el usuario ya tiene cuenta, puede loguearse para poder ingresar
- * @author: Ronnie Mascaro Troncoso
+ * Clase para loguearse, si el usuario ya esta registrado, puede loguearse para poder ingresar
+ * @autor: Ronnie Mascaro Troncoso
  */
+
+
 public class Main1Logueo extends AppCompatActivity
 {
 

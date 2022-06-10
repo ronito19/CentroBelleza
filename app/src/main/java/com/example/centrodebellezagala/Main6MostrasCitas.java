@@ -20,6 +20,14 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Clase que muestra todas las citas registradas asociadas al correo del cliente
+ * @autor: Ronnie Mascaro Troncoso
+ */
+
+
+
 public class Main6MostrasCitas extends AppCompatActivity
 {
     private RecyclerView rv_citas = null;

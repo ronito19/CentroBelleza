@@ -30,6 +30,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Clase para coger una cita en el centro de belleza
+ * @autor: Ronnie Mascaro Troncoso
+ */
+
+
 public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private TextView txt_tratamientos, txt_fecha, txt_hora;

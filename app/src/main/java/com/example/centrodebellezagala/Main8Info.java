@@ -7,6 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 
+/**
+ * Clase donde podemos ver una breve reseña de nuestro centro de belleza
+ * @autor: Ronnie Mascaro Troncoso
+ */
+
+
 
 
 public class Main8Info extends AppCompatActivity
