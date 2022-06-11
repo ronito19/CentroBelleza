@@ -9,13 +9,13 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="410dp"
-        android:layout_height="700dp"
+        android:layout_width="411dp"
+        android:layout_height="711dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
 
-        tools:ignore="SpeakableTextPresentCheck">
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -226,29 +226,25 @@
                 app:srcCompat="@drawable/tratamientos" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/bt_salir8"
-                android:layout_width="388dp"
+                android:id="@+id/bt_atras8"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="512dp"
-                android:layout_marginEnd="50dp"
-                android:onClick="salir8"
-                android:text="SALIR" />
+                android:onClick="atras8"
+                android:text="ATRAS" />
 
             <Button
-                android:id="@+id/bt_atras8"
-                android:layout_width="130dp"
+                android:id="@+id/bt_salir8"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="-550dp"
-                android:onClick="atras8"
-                android:text="ATRAS"
+                android:onClick="salir8"
+                android:text="SALIR"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 

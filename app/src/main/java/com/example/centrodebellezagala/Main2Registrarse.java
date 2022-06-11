@@ -36,8 +36,8 @@ import java.util.List;
 
 public class Main2Registrarse extends AppCompatActivity
 {
-    private EditText edt_nombre, edt_apellidos, edt_edad, edt_telefono, edt_correo, edt_clave1, edt_clave2;
-    private ImageView img_registrarse;
+    public EditText edt_nombre, edt_apellidos, edt_edad, edt_telefono, edt_correo, edt_clave1, edt_clave2;
+    public ImageView img_registrarse;
     private FirebaseAuth mAuth;
 
 
@@ -133,11 +133,11 @@ public class Main2Registrarse extends AppCompatActivity
 
                             }, email, img_registrarse);
 
-                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,  email + "/" + ".png");
+                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,email + "/" + ".png");
                         }
                         else
                         {
-                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,  null);
+                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,null);
                         }
                         new ClienteFirebaseController().insertarCliente(new ClienteFirebaseController.ClienteStatus()
                         {

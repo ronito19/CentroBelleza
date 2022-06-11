@@ -97,6 +97,34 @@ public class ListaCitasAdapter extends RecyclerView.Adapter<CitasViewHolder>
             holder.txt_rv_cita_dia.setText(" Dia: " + cita_actual.getFecha());
             holder.txt_rv_cita_hora.setText(" Hora: " + cita_actual.getHora());
 
+            if (cita_actual.getFoto() != null)
+            {
+                new ImagenesFirebase().descargarFoto(new ImagenesFirebase.FotoStatus()
+                {
+                    @Override
+                    public void FotoIsDownload(byte[] bytes)
+                    {
+                        if(bytes != null)
+                        {
+                            Log.i("firebasedb"," Foto descargada correctamente ");
+                            Bitmap fotob = decodeSampledBitmapFrombyteArray(bytes, Configuracion.ALTO_IMAGENES_BITMAP, Configuracion.ANCHO_IMAGENES_BITMAP);
+                            holder.img_rv_cita_cita.setImageBitmap(fotob);
+                        }
+                        else
+                        {
+                            Log.i("firebasedb","foto no descargada correctamente");
+                        }
+                    }
+                    @Override
+                    public void FotoIsUpload() {
+                    }
+                    @Override
+                    public void FotoIsDelete() {
+                    }
+                },cita_actual.getFoto());
+
+            }
+
 
         }
     }

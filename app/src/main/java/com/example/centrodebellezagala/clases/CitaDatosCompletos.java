@@ -14,6 +14,7 @@ public class CitaDatosCompletos implements Serializable
     private String tratamientos;
     private String fecha;
     private String hora;
+    private String foto;
     //-------------------------------------------------------------
 
 
@@ -26,6 +27,7 @@ public class CitaDatosCompletos implements Serializable
         this.tratamientos = "";
         this.fecha = "";
         this.hora = "";
+        this.foto = null;
     }
 
 
@@ -37,6 +39,18 @@ public class CitaDatosCompletos implements Serializable
         this.tratamientos = tratamientos;
         this.fecha = fecha;
         this.hora = hora;
+        this.foto = null;
+    }
+
+
+    public CitaDatosCompletos(String correoCliente, String nombre, String apellidos, String tratamientos, String fecha, String hora, String foto) {
+        this.correoCliente = correoCliente;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.tratamientos = tratamientos;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.foto = foto;
     }
 
 
@@ -90,6 +104,14 @@ public class CitaDatosCompletos implements Serializable
     public void setHora(String hora) {
         this.hora = hora;
     }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
     //-------------------------------------------------------------------------------------------
 
 
@@ -119,6 +141,7 @@ public class CitaDatosCompletos implements Serializable
                 ", tratamientos='" + tratamientos + '\'' +
                 ", fecha='" + fecha + '\'' +
                 ", hora='" + hora + '\'' +
+                ", foto='" + foto + '\'' +
                 '}';
     }
 
