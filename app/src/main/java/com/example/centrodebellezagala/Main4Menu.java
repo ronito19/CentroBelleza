@@ -3,7 +3,8 @@ package com.example.centrodebellezagala;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
@@ -35,9 +36,11 @@ public class Main4Menu extends AppCompatActivity
     public FirebaseAuth mAuth;
     private FirebaseDatabase db;
     private DatabaseReference myRef;
+    public Button bt1, bt2;
+    public ImageView img1, img2;
 
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -50,10 +53,13 @@ public class Main4Menu extends AppCompatActivity
         usuarioUID = User.getUid();
         emailUser = User.getEmail();
         usuarioUID =  mAuth.getUid();
+        bt1 = (Button) findViewById(R.id.bt_coger_cita);
+        bt2 = (Button) findViewById(R.id.bt_conocenos);
+        img1 = (ImageView) findViewById(R.id.img_coger_cita);
+        img2 = (ImageView) findViewById(R.id.img_conocenos);
         txt_nombre = (TextView) findViewById(R.id.txt_nombre);
+        ocultarBotonAdmin();
         cogerDatosUsuario();
-
-
     }
 
 
@@ -81,6 +87,28 @@ public class Main4Menu extends AppCompatActivity
 
 
 
+    }
+
+
+
+    public void ocultarBotonAdmin()
+    {
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if(user.getEmail().equalsIgnoreCase("administrador@gmail.com"))
+        {
+            bt1.setVisibility(View.GONE);
+            bt2.setVisibility(View.GONE);
+            img1.setVisibility(View.GONE);
+            img2.setVisibility(View.GONE);
+        }
+        else
+        {
+            bt1.setVisibility(View.VISIBLE);
+            bt2.setVisibility(View.VISIBLE);
+            img1.setVisibility(View.VISIBLE);
+            img2.setVisibility(View.VISIBLE);
+        }
     }
 
 

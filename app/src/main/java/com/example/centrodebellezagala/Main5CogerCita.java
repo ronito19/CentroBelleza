@@ -9,25 +9,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.centrodebellezagala.clases.CitaDatosCompletos;
-import com.example.centrodebellezagala.clases.Citas;
 import com.example.centrodebellezagala.clases.Clientes;
+import com.example.centrodebellezagala.clases.ListaCitasAdapter;
 import com.example.centrodebellezagala.controladores.CitaFirebaseController;
-import com.example.centrodebellezagala.controladores.ClienteFirebaseController;
+import com.example.centrodebellezagala.controladores.CitaFirebaseController.CitaStatus;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,16 +35,22 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     private Spinner sp_tratamientos, sp_hora;
     private EditText edt_fecha;
     private FirebaseAuth mAuth;
+    private ListaCitasAdapter mAdapter;
+    private DatabaseReference mDatabase;
+    private List<CitaDatosCompletos> citas2;
+
 
     CitaDatosCompletos cit;
     Clientes c;
 
 
 
+
     // Recoger variables a nivel de clase
 
-    private String tratamientos, fecha, hora, correoCliente;
-    private Clientes clienteLogueado;
+    public String tratamientos, fecha, hora, correoCliente;
+    public Clientes clienteLogueado;
+
 
 
     @Override
@@ -81,14 +79,15 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_main5_coger_cita);
         txt_tratamientos = (TextView) findViewById(R.id.txt_tratamientos);
         sp_tratamientos = (Spinner) findViewById(R.id.sp_tratamientos);
-
+        mAdapter = new ListaCitasAdapter(this);
         txt_fecha = (TextView) findViewById(R.id.txt_fecha);
         edt_fecha = (EditText) findViewById(R.id.edt_fecha);
         txt_hora = (TextView) findViewById(R.id.txt_hora);
         sp_hora = (Spinner) findViewById(R.id.sp_hora);
         mAuth = FirebaseAuth.getInstance();
         clienteLogueado = (Main4Menu.clienteLogueado);
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        cargarCitas();
 
         if(sp_tratamientos != null)
         {
@@ -157,42 +156,108 @@ public class Main5CogerCita extends AppCompatActivity implements AdapterView.OnI
     }
 
 
-    public void guardar_Cita(View view)
+    public void cargarCitas()
     {
-        if(guardarCitaValidacion())
+        new CitaFirebaseController().obtenerCita(new CitaStatus()
         {
-            fecha = String.valueOf(edt_fecha.getText());
-            correoCliente = mAuth.getCurrentUser().getEmail();
-            cit = new CitaDatosCompletos(correoCliente, clienteLogueado.getNombre(), clienteLogueado.getApellidos(), tratamientos, fecha, hora);
-            new CitaFirebaseController().guardar_Cita(new CitaFirebaseController.CitaStatus() {
-                @Override
-                public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys) {
+            @Override
+            public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+            {
 
-                }
+                citas2 = citas;
+            }
 
-                @Override
-                public void citaIsAdd() {
-                    Toast.makeText(Main5CogerCita.this, " Cita guardada correctamente ", Toast.LENGTH_LONG).show();
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    Intent intent = new Intent(Main5CogerCita.this, Main4Menu.class);
-                    startActivity(intent);
-                }
+            @Override
+            public void citaIsAdd()
+            {
 
-                @Override
-                public void citaIsUpdate() {
+            }
 
-                }
+            @Override
+            public void citaIsUpdate()
+            {
 
-                @Override
-                public void citaIsDelete() {
+            }
 
-                }
-            }, cit);
-        }
+            @Override
+            public void citaIsDelete()
+            {
 
-
+            }
+        });
 
     }
+
+
+    public boolean validarCitasGuardadas()
+    {
+        boolean ValidadoOK = true;
+
+        for (CitaDatosCompletos cita : citas2)
+        {
+            if(sp_hora.getSelectedItem().toString().equals(cita.getHora()) &&
+                    edt_fecha.getText().toString().equals(cita.getFecha()) &&
+                    sp_tratamientos.getSelectedItem().toString().equals(cita.getTratamientos()))
+            {
+                Toast.makeText(Main5CogerCita.this, "Ya hay una cita con este tratamiento, fecha y hora seleccionada, debes tomar otra",Toast.LENGTH_LONG).show();
+                ValidadoOK = false;
+                return ValidadoOK;
+            }
+        }
+            return ValidadoOK;
+    }
+
+
+
+
+
+    public void guardar_Cita(View view)
+    {
+        boolean validar = validarCitasGuardadas();
+
+        if (guardarCitaValidacion() && validar)
+        {
+                fecha = String.valueOf(edt_fecha.getText());
+                correoCliente = mAuth.getCurrentUser().getEmail();
+                cit = new CitaDatosCompletos(correoCliente, clienteLogueado.getNombre(), clienteLogueado.getApellidos(), tratamientos, fecha, hora);
+                new CitaFirebaseController().guardar_Cita(new CitaStatus()
+                {
+                    // Cuando le hagamos clic en el boton de aceptar...
+
+
+                    @Override
+                    public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+                    {
+
+                    }
+
+                    @Override
+                    public void citaIsAdd()
+                    {
+                        Toast.makeText(Main5CogerCita.this, " Cita guardada correctamente ", Toast.LENGTH_LONG).show();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent intent = new Intent(Main5CogerCita.this, Main4Menu.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void citaIsUpdate()
+                    {
+
+                    }
+
+                    @Override
+                    public void citaIsDelete()
+                    {
+
+                    }
+                }, cit);
+
+        }
+
+    }
+
+
 
 
     private boolean guardarCitaValidacion()

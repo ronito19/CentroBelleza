@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.centrodebellezagala.clases.CitaDatosCompletos;
 import com.example.centrodebellezagala.controladores.CitaFirebaseController;
+import com.example.centrodebellezagala.utilidades.ImagenesFirebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -63,6 +64,8 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
             edt_detalles_correo.setText(cit.getCorreoCliente());
             edt_detalles_nombre.setText(cit.getNombre());
             edt_detalles_apellidos.setText(cit.getApellidos());
+            String sp_detalles_tratamientos = cit.getTratamientos();
+
             edt_detalles_fecha.setText(cit.getFecha());
         }
 
@@ -135,8 +138,23 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
                 finish();
             }
         }, key);
+
+        new ImagenesFirebase().borrarFoto(new ImagenesFirebase.FotoStatus()
+        {
+            @Override
+            public void FotoIsDownload(byte[] bytes) {
+            }
+            @Override
+            public void FotoIsDelete() {
+            }
+            @Override
+            public void FotoIsUpload() {
+                Toast.makeText(Main7MostrarDetallesCitas.this, " foto eliminada correcto ", Toast.LENGTH_LONG).show();
+            }
+        },cit.getFoto());
     }
     //---------------------------------------------------------------------------------------------------------
+
 
     public void actualizar_cita(View view)
     {
@@ -144,6 +162,7 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
         String nombre = String.valueOf(edt_detalles_nombre.getText());
         String apellidos = String.valueOf(edt_detalles_apellidos.getText());
         String fecha = String.valueOf(edt_detalles_fecha.getText());
+
         CitaDatosCompletos cit = new CitaDatosCompletos(correoCliente, nombre, apellidos, tratamientos, fecha, hora);
 
          new CitaFirebaseController().actualizarCita(new CitaFirebaseController.CitaStatus()
@@ -173,6 +192,8 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
 
             }
         },key,cit);
+
+
     }
     //--------------------------------------------------------------------------------------------
 

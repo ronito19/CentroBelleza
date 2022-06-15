@@ -10,7 +10,8 @@
         android:theme="@style/Theme.CentroDeBellezaGALA">
         <activity
             android:name=".Main1Logueo"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,37 +20,44 @@
         </activity>
         <activity
             android:name=".Main2Registrarse"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".Main3Bienvenida"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".Main4Menu"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".Main5CogerCita"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".Main6MostrasCitas"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".Main7MostrarDetallesCitas"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".Main8Info"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
 
         </activity>
 

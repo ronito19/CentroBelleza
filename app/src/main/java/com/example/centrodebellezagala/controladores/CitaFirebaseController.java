@@ -53,7 +53,7 @@ public class CitaFirebaseController
 
 
 
-    public void obtenerCita(final CitaStatus citaStatus)
+        public void obtenerCita(final CitaStatus citaStatus)
     {
         this.myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,6 +78,8 @@ public class CitaFirebaseController
     //---------------------------------------------------------------------------------
     public void guardar_Cita(final CitaStatus citaStatus, CitaDatosCompletos cit)
     {
+
+
         this.myRef.push().setValue(cit).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -118,17 +120,21 @@ public class CitaFirebaseController
     {
         Map<String, Object> nuevaCita = new HashMap<String,Object>();
         nuevaCita.put(key,cit);
-        myRef.updateChildren(nuevaCita).addOnSuccessListener(new OnSuccessListener<Void>() {
+        myRef.updateChildren(nuevaCita).addOnSuccessListener(new OnSuccessListener<Void>()
+                {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        // si todo va bien
+                    public void onSuccess(Void aVoid)
+                    {
+                        // si va bien
                         citaStatus.citaIsUpdate();
                         Log.i("firebasedb", " La cita se actualizo correctamente");
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
+                .addOnFailureListener(new OnFailureListener()
+                {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFailure(@NonNull Exception e)
+                    {
                         // si hay un fallo
                         Log.i("firebasedb", " La cita no se pudo actualizar correctamente");
                     }
