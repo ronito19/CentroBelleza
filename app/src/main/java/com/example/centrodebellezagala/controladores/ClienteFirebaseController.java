@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.centrodebellezagala.clases.Clientes;
+import com.example.centrodebellezagala.clases.Modulo2Clientes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,29 +21,37 @@ import java.util.Map;
 
 public class ClienteFirebaseController
 {
+    // Atributos
     private FirebaseDatabase mDatabase;
     private DatabaseReference myRef;
-    private List<Clientes> clientes;
-    private Clientes cli;
+    private List<Modulo2Clientes> clientes;
+    private Modulo2Clientes cli;
 
 
 
 
+    // Diferentes fases de los clientes
     public interface ClienteStatus
     {
-        void clienteIsLoaded(List<Clientes> clientes, List<String> keys);
+        void clienteIsLoaded(List<Modulo2Clientes> clientes, List<String> keys);
         void clienteIsAdd();
         void clienteIsUpdate();
         void clienteIsDelete();
-        void clienteIsEncontrado(Clientes cli);
+        void clienteIsEncontrado(Modulo2Clientes cli);
     }
 
-    public ClienteFirebaseController() {
+
+    // Conexion con la base de datos con la referencia Clientes
+    public ClienteFirebaseController()
+    {
         this.mDatabase  = FirebaseDatabase.getInstance();
         this.myRef = mDatabase.getReference("clientes");
-        this.clientes  = new ArrayList<Clientes>();
+        this.clientes  = new ArrayList<Modulo2Clientes>();
     }
 
+
+
+    // Metodos para obtener, insertar, borrar y actualizar un cliente
     public void obtenerCliente(final ClienteStatus clienteStatus)
     {
         this.myRef.addValueEventListener(new ValueEventListener() {
@@ -54,7 +62,7 @@ public class ClienteFirebaseController
                 for(DataSnapshot keynode: snapshot.getChildren())
                 {
                     keys.add(keynode.getKey());
-                    Clientes cli = keynode.getValue(Clientes.class);
+                    Modulo2Clientes cli = keynode.getValue(Modulo2Clientes.class);
                     clientes.add(cli);
                 }
                 clienteStatus.clienteIsLoaded(clientes,keys);
@@ -79,7 +87,7 @@ public class ClienteFirebaseController
                 for(DataSnapshot keynode: snapshot.getChildren())
                 {
                     keys.add(keynode.getKey());
-                    Clientes cli = keynode.getValue(Clientes.class);
+                    Modulo2Clientes cli = keynode.getValue(Modulo2Clientes.class);
                     if(cli.getNombre().equalsIgnoreCase(email))
                     {
                         clienteStatus.clienteIsEncontrado(cli);
@@ -98,7 +106,7 @@ public class ClienteFirebaseController
     }
 
     //---------------------------------------------------------------------------------
-    public void insertarCliente(final ClienteStatus clienteStatus, Clientes cli, FirebaseAuth mAuth)
+    public void insertarCliente(final ClienteStatus clienteStatus, Modulo2Clientes cli, FirebaseAuth mAuth)
     {
 
         this.myRef.child(mAuth.getUid()).setValue(cli).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -137,7 +145,7 @@ public class ClienteFirebaseController
                 });
     }
     //---------------------------------------------------------------------------------
-    public void actualizarCliente(final ClienteStatus clienteStatus, String key, Clientes cli)
+    public void actualizarCliente(final ClienteStatus clienteStatus, String key, Modulo2Clientes cli)
     {
         Map<String, Object> nuevoCliente = new HashMap<String,Object>();
         nuevoCliente.put(key,cli);

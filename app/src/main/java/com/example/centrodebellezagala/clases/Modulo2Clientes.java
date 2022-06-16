@@ -1,14 +1,11 @@
 package com.example.centrodebellezagala.clases;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Clientes implements Serializable
+public class Modulo2Clientes implements Serializable
 {
-
+    // Atributos
     private String nombre;
     private String apellidos;
     private Integer edad;
@@ -19,8 +16,8 @@ public class Clientes implements Serializable
     private String foto;
     //-----------------------------------------------------------------------------------------
 
-
-    public Clientes()
+    // Constructores
+    public Modulo2Clientes()
     {
         this.nombre = "";
         this.apellidos = "";
@@ -33,7 +30,7 @@ public class Clientes implements Serializable
     }
 
 
-    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave1, String clave2)
+    public Modulo2Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave1, String clave2)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -46,7 +43,7 @@ public class Clientes implements Serializable
     }
 
 
-    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String foto)
+    public Modulo2Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String foto)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -57,7 +54,7 @@ public class Clientes implements Serializable
     }
 
 
-    public Clientes(String nombre)
+    public Modulo2Clientes(String nombre)
     {
         this.nombre = "";
         this.apellidos = "";
@@ -70,7 +67,7 @@ public class Clientes implements Serializable
     }
 
 
-    public Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave1, String clave2, String foto) {
+    public Modulo2Clientes(String nombre, String apellidos, Integer edad, String telefono, String correo, String clave1, String clave2, String foto) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
@@ -85,10 +82,7 @@ public class Clientes implements Serializable
     //--------------------------------------------------------------------------------------
 
 
-
-
-
-
+    // Getters y setters
     public String getNombre() {
         return nombre;
     }
@@ -153,11 +147,12 @@ public class Clientes implements Serializable
     //-----------------------------------------------------------------------------------
 
 
+    // Equals y hashCode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Clientes)) return false;
-        Clientes clientes = (Clientes) o;
+        if (!(o instanceof Modulo2Clientes)) return false;
+        Modulo2Clientes clientes = (Modulo2Clientes) o;
         return correo.equals(clientes.correo);
     }
 
@@ -168,6 +163,7 @@ public class Clientes implements Serializable
     //-----------------------------------------------------------------------------------
 
 
+    // ToString
     @Override
     public String toString() {
         return "Clientes{" +

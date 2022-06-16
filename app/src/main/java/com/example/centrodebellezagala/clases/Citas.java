@@ -8,7 +8,7 @@ public class Citas implements Serializable
     private String tratamientos;
     private String fecha;
     private String hora;
-    private Clientes cliente;
+    private Modulo2Clientes cliente;
     //-----------------------------------------------------------
 
 
@@ -22,7 +22,7 @@ public class Citas implements Serializable
 
 
 
-    public Citas(String tratamientos, String fecha, String hora, Clientes cliente)
+    public Citas(String tratamientos, String fecha, String hora, Modulo2Clientes cliente)
     {
         this.tratamientos = tratamientos;
         this.fecha = fecha;
@@ -56,11 +56,11 @@ public class Citas implements Serializable
         this.hora = hora;
     }
 
-    public Clientes getCliente() {
+    public Modulo2Clientes getCliente() {
         return cliente;
     }
 
-    public void setCliente(Clientes cliente) {
+    public void setCliente(Modulo2Clientes cliente) {
         this.cliente = cliente;
     }
 

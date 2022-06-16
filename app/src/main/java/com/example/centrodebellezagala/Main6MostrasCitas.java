@@ -4,15 +4,13 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.centrodebellezagala.clases.CitaDatosCompletos;
+import com.example.centrodebellezagala.clases.Modulo1CitaDatosCompletos;
 import com.example.centrodebellezagala.clases.ListaCitasAdapter;
 import com.example.centrodebellezagala.controladores.CitaFirebaseController;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,14 +29,17 @@ import java.util.List;
 
 public class Main6MostrasCitas extends AppCompatActivity
 {
+    // Atributos / declaraciones
     private RecyclerView rv_citas = null;
     private ListaCitasAdapter mAdapter;
-    private ArrayList<CitaDatosCompletos> citas;
+    private ArrayList<Modulo1CitaDatosCompletos> citas;
     private ArrayList<String> keys;
     private FirebaseAuth mAuth;
-    private ArrayList<CitaDatosCompletos> misCitas;
+    private ArrayList<Modulo1CitaDatosCompletos> misCitas;
 
 
+
+    // Estado de la aplicacion que se ejecuta si todo esta bien
     @Override
     public void onStart()
     {
@@ -62,6 +63,8 @@ public class Main6MostrasCitas extends AppCompatActivity
 
 
 
+
+    // Metodo para inicializar los datos del registro del administrador de la aplicacion
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -78,7 +81,7 @@ public class Main6MostrasCitas extends AppCompatActivity
                 {
 
                     @Override
-                    public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+                    public void citaIsLoaded(List<Modulo1CitaDatosCompletos> citas, List<String> keys)
                     {
                         mAdapter.setListaCitas(citas);
                         mAdapter.setKeys(keys);
@@ -108,10 +111,10 @@ public class Main6MostrasCitas extends AppCompatActivity
             {
 
                 @Override
-                public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+                public void citaIsLoaded(List<Modulo1CitaDatosCompletos> citas, List<String> keys)
                 {
-                    List<CitaDatosCompletos> misCitas = new ArrayList<CitaDatosCompletos>();
-                    for (CitaDatosCompletos c: citas)
+                    List<Modulo1CitaDatosCompletos> misCitas = new ArrayList<Modulo1CitaDatosCompletos>();
+                    for (Modulo1CitaDatosCompletos c: citas)
                     {
                         if(c.getCorreoCliente().equalsIgnoreCase(mAuth.getCurrentUser().getEmail()))
                         {
@@ -147,6 +150,8 @@ public class Main6MostrasCitas extends AppCompatActivity
         //----------------------------------------------------------------------------------------
 
 
+
+        // Muestra las citas programadas en un adapter
         rv_citas.setAdapter(mAdapter);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
         {
@@ -157,6 +162,7 @@ public class Main6MostrasCitas extends AppCompatActivity
     }
 
 
+    // Botos para salir o cerrar sesion
     public void salir(View view)
     {
         Intent intent = new Intent(this, Main1Logueo.class);
@@ -165,6 +171,8 @@ public class Main6MostrasCitas extends AppCompatActivity
     }
 
 
+
+    // Boton para regresar a la pantalla anterior
     public void atras(View view)
     {
         Intent intent = new Intent(this, Main4Menu.class);

@@ -21,18 +21,18 @@ import java.util.List;
 public class ListaCitasAdapter extends RecyclerView.Adapter<CitasViewHolder>
 {
     private Context c;
-    private List<CitaDatosCompletos> listaCitas;
+    private List<Modulo1CitaDatosCompletos> listaCitas;
     private List<String> keys;
     private LayoutInflater mInflater;
 
 
     public void setC(Context c) {
         this.c = c;
-        this.listaCitas = new ArrayList<CitaDatosCompletos>();
+        this.listaCitas = new ArrayList<Modulo1CitaDatosCompletos>();
     }
 
 
-    public ListaCitasAdapter(Context c, List<CitaDatosCompletos> listaCitas,List<String> keys) {
+    public ListaCitasAdapter(Context c, List<Modulo1CitaDatosCompletos> listaCitas, List<String> keys) {
         this.c = c;
         this.listaCitas = listaCitas;
         this.keys = keys;
@@ -58,13 +58,13 @@ public class ListaCitasAdapter extends RecyclerView.Adapter<CitasViewHolder>
     }
 
 
-    public List<CitaDatosCompletos> getListaCitas()
+    public List<Modulo1CitaDatosCompletos> getListaCitas()
     {
         return listaCitas;
     }
 
 
-    public void setListaCitas(List<CitaDatosCompletos> listaCitas)
+    public void setListaCitas(List<Modulo1CitaDatosCompletos> listaCitas)
     {
         this.listaCitas = listaCitas;
         notifyDataSetChanged();
@@ -89,7 +89,7 @@ public class ListaCitasAdapter extends RecyclerView.Adapter<CitasViewHolder>
     {
         if(listaCitas != null)
         {
-            CitaDatosCompletos cita_actual = listaCitas.get(position);
+            Modulo1CitaDatosCompletos cita_actual = listaCitas.get(position);
             holder.txt_rv_cita_correo.setText(" Correo: " + cita_actual.getCorreoCliente());
             holder.txt_rv_cita_nombre.setText(" Nombre: " + cita_actual.getNombre());
             holder.txt_rv_cita_apellidos.setText(" Apellidos: " + cita_actual.getApellidos());

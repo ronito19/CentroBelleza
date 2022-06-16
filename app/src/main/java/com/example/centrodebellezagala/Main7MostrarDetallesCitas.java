@@ -2,7 +2,7 @@ package com.example.centrodebellezagala;
 
 import static com.example.centrodebellezagala.clases.CitasViewHolder.EXTRA_OBJETO_CITA;
 import static com.example.centrodebellezagala.clases.CitasViewHolder.EXTRA_OBJETO_CITA_KEY;
-import static com.example.centrodebellezagala.clases.CitasViewHolder.EXTRA_OBJETO_IMG_CITA;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.centrodebellezagala.clases.CitaDatosCompletos;
+import com.example.centrodebellezagala.clases.Modulo1CitaDatosCompletos;
 import com.example.centrodebellezagala.controladores.CitaFirebaseController;
 import com.example.centrodebellezagala.utilidades.ImagenesFirebase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,16 +32,19 @@ import java.util.List;
 
 public class Main7MostrarDetallesCitas extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
+    // Atributos / declaraciones
     private EditText edt_detalles_correo, edt_detalles_nombre, edt_detalles_apellidos, edt_detalles_fecha;
     private Spinner sp_detalles_tratamiento, sp_detalles_hora;
     private ImageView img_detalles_foto_cita;
     private String key;
-    private CitaDatosCompletos cit;
+    private Modulo1CitaDatosCompletos cit;
 
     private String tratamientos, fecha, hora;
 
 
 
+
+    // Metodo para inicializar los datos de los detalles de las citas de la aplicacion
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -59,7 +62,7 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
 
         if(intent != null)
         {
-            cit = (CitaDatosCompletos) intent.getSerializableExtra(EXTRA_OBJETO_CITA);
+            cit = intent.getParcelableExtra(EXTRA_OBJETO_CITA);
             key = intent.getStringExtra(EXTRA_OBJETO_CITA_KEY);
             edt_detalles_correo.setText(cit.getCorreoCliente());
             edt_detalles_nombre.setText(cit.getNombre());
@@ -90,6 +93,8 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
     }
 
 
+
+    // metodo para actualizar el dataPicker de la fecha
     public void actualizar_Fecha(int anyo, int mes, int dia)
     {
         String texto_anyo = String.valueOf(anyo);
@@ -100,6 +105,8 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
     }
 
 
+
+    // metodo para el calendario
     public void escoger_fecha(View view)
     {
         DatePicker2Fragment calendario1 = new DatePicker2Fragment();
@@ -109,12 +116,13 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
 
 
 
+    // Metodo para borrar una cita
     public  void borrar_cita(View view)
     {
         new CitaFirebaseController().borrarCita(new CitaFirebaseController.CitaStatus()
         {
             @Override
-            public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+            public void citaIsLoaded(List<Modulo1CitaDatosCompletos> citas, List<String> keys)
             {
 
             }
@@ -156,19 +164,23 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
     //---------------------------------------------------------------------------------------------------------
 
 
+
+
+    // Metodo para editar / actualizar una cita
     public void actualizar_cita(View view)
     {
         String correoCliente = String.valueOf(edt_detalles_correo.getText());
         String nombre = String.valueOf(edt_detalles_nombre.getText());
         String apellidos = String.valueOf(edt_detalles_apellidos.getText());
         String fecha = String.valueOf(edt_detalles_fecha.getText());
+        String claveCita = cit.getId();
 
-        CitaDatosCompletos cit = new CitaDatosCompletos(correoCliente, nombre, apellidos, tratamientos, fecha, hora);
+        Modulo1CitaDatosCompletos cit = new Modulo1CitaDatosCompletos(correoCliente, nombre, apellidos, tratamientos, fecha, hora);
 
          new CitaFirebaseController().actualizarCita(new CitaFirebaseController.CitaStatus()
         {
             @Override
-            public void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys)
+            public void citaIsLoaded(List<Modulo1CitaDatosCompletos> citas, List<String> keys)
             {
 
             }
@@ -191,16 +203,35 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
             {
 
             }
-        },key,cit);
+        },claveCita,cit);
 
 
     }
     //--------------------------------------------------------------------------------------------
 
 
+
+    // Metodo que coge la posicion del spinner seleccionado
+    public int obtenerPosicionSpinner(String dato , ArrayAdapter adapter)
+    {
+
+        int spinnerPosition = adapter.getPosition(dato);
+
+        return spinnerPosition;
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
+
+        //declaramos los adaptadores Spinner
+        ArrayAdapter adaptadorTratamientos = (ArrayAdapter) sp_detalles_tratamiento.getAdapter(); //cast to an ArrayAdapter
+        ArrayAdapter adaptadorHoras = (ArrayAdapter) sp_detalles_hora.getAdapter(); //cast to an ArrayAdapter
+
+        //set the default according to value
+        sp_detalles_tratamiento.setSelection(obtenerPosicionSpinner(cit.getTratamientos(),adaptadorTratamientos));
+        sp_detalles_hora.setSelection(obtenerPosicionSpinner(cit.getHora(),adaptadorHoras));
+
         Spinner spinner = (Spinner) adapterView;
         if(spinner.getId() == R.id.sp_detalles_tratamiento)
         {
@@ -220,6 +251,8 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
     }
 
 
+
+    // Metodo para regresar a la pantalla anterior
     public void atras(View view)
     {
         Intent intent = new Intent(this, Main6MostrasCitas.class);
@@ -227,6 +260,8 @@ public class Main7MostrarDetallesCitas extends AppCompatActivity implements Adap
     }
 
 
+
+    // Metodo para salir o cerrar sesion
     public void salir(View view)
     {
         Intent intent = new Intent(this, Main1Logueo.class);

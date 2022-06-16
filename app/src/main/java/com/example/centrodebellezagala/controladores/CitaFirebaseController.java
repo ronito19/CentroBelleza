@@ -4,13 +4,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.centrodebellezagala.clases.CitaDatosCompletos;
-import com.example.centrodebellezagala.clases.Citas;
-import com.example.centrodebellezagala.clases.Clientes;
+import com.example.centrodebellezagala.clases.Modulo1CitaDatosCompletos;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,27 +20,29 @@ import java.util.Map;
 
 public class CitaFirebaseController
 {
+    // Atributos
     private FirebaseDatabase mDatabase;
     private DatabaseReference myRef;
-    private List<CitaDatosCompletos> citas;
+    private List<Modulo1CitaDatosCompletos> citas;
     //private FirebaseAuth mAuth;
 
 
-
+    // Diferentes fases de las citas
     public interface CitaStatus
     {
-        void citaIsLoaded(List<CitaDatosCompletos> citas, List<String> keys);
+        void citaIsLoaded(List<Modulo1CitaDatosCompletos> citas, List<String> keys);
         void citaIsAdd();
         void citaIsUpdate();
         void citaIsDelete();
     }
 
 
+    // Conexion con la base de datos de firebase con la referencia citas
     public CitaFirebaseController()
     {
         this.mDatabase  = FirebaseDatabase.getInstance();
         this.myRef = mDatabase.getReference("citas");
-        this.citas  = new ArrayList<CitaDatosCompletos>();
+        this.citas  = new ArrayList<Modulo1CitaDatosCompletos>();
     }
 
 
@@ -52,7 +50,7 @@ public class CitaFirebaseController
 
 
 
-
+    // Metodos para obtener, guardar, borrar y actualizar citas
         public void obtenerCita(final CitaStatus citaStatus)
     {
         this.myRef.addValueEventListener(new ValueEventListener() {
@@ -62,8 +60,13 @@ public class CitaFirebaseController
                 List<String> keys = new ArrayList<String>();
                 for(DataSnapshot keynode: snapshot.getChildren())
                 {
+                    DatabaseReference databaseReference = keynode.getRef();
+                    ArrayList claves = new ArrayList();
+                    claves.add(databaseReference.getKey());
+
                     keys.add(keynode.getKey());
-                    CitaDatosCompletos cit = keynode.getValue(CitaDatosCompletos.class);
+                    Modulo1CitaDatosCompletos cit = keynode.getValue(Modulo1CitaDatosCompletos.class);
+                    cit.setId(databaseReference.getKey());
                     citas.add(cit);
                 }
                 citaStatus.citaIsLoaded(citas,keys);
@@ -76,7 +79,7 @@ public class CitaFirebaseController
     }
 
     //---------------------------------------------------------------------------------
-    public void guardar_Cita(final CitaStatus citaStatus, CitaDatosCompletos cit)
+    public void guardar_Cita(final CitaStatus citaStatus, Modulo1CitaDatosCompletos cit)
     {
 
 
@@ -116,7 +119,7 @@ public class CitaFirebaseController
                 });
     }
     //---------------------------------------------------------------------------------
-    public void actualizarCita(final CitaStatus citaStatus, String key, CitaDatosCompletos cit)
+    public void actualizarCita(final CitaStatus citaStatus, String key, Modulo1CitaDatosCompletos cit)
     {
         Map<String, Object> nuevaCita = new HashMap<String,Object>();
         nuevaCita.put(key,cit);

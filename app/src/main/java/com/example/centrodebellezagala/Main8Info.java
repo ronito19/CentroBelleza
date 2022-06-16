@@ -24,6 +24,8 @@ public class Main8Info extends AppCompatActivity
         setContentView(R.layout.activity_main8_info);
     }
 
+
+    // Metodo para volver a la pantalla anterior
     public void atras8(View view)
     {
         Intent intent = new Intent(this, Main4Menu.class);
@@ -31,6 +33,8 @@ public class Main8Info extends AppCompatActivity
     }
 
 
+
+    // Metodo para salir o cerrar sesion
     public void salir8(View view)
     {
         Intent intent = new Intent(this, Main1Logueo.class);

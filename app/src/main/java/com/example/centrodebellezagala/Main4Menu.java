@@ -11,7 +11,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.centrodebellezagala.clases.Clientes;
+import com.example.centrodebellezagala.clases.Modulo2Clientes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,8 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Main4Menu extends AppCompatActivity
 {
+    // Atributos / declaraciones
     public TextView txt_nombre;
-    public static Clientes clienteLogueado;
+    public static Modulo2Clientes clienteLogueado;
     public String usuarioUID, emailUser;
     public FirebaseUser User;
     public FirebaseAuth mAuth;
@@ -40,6 +41,8 @@ public class Main4Menu extends AppCompatActivity
     public ImageView img1, img2;
 
 
+
+    // // Metodo para inicializar los datos que serviran para coger nombre del cliente, ocultar botones, etc.,  en la aplicacion
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -64,6 +67,7 @@ public class Main4Menu extends AppCompatActivity
 
 
     // METODOS
+    // Metodo para coger el nombre y apellidos del cliente y colocarlo cuando ingrese a la pantalla principal
 
     private void cogerDatosUsuario()
     {
@@ -78,7 +82,7 @@ public class Main4Menu extends AppCompatActivity
                 }
                 else
                 {
-                    clienteLogueado = task.getResult().getValue(Clientes.class);
+                    clienteLogueado = task.getResult().getValue(Modulo2Clientes.class);
                     txt_nombre.setText(" Hola... " + clienteLogueado.getNombre() + " " + clienteLogueado.getApellidos());
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                 }
@@ -91,6 +95,8 @@ public class Main4Menu extends AppCompatActivity
 
 
 
+
+    // Metodo que oculta ciertos botones cuando se loquea el administrador
     public void ocultarBotonAdmin()
     {
         FirebaseUser user = mAuth.getCurrentUser();
@@ -138,7 +144,7 @@ public class Main4Menu extends AppCompatActivity
     }
 
 
-    //Metodo que nos dirige a salir de la sesion
+    //Metodo que nos dirige a salir o cerrar sesion
     public void ir_a_la_salida(View view)
     {
         mAuth.signOut();

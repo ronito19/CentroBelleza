@@ -25,6 +25,8 @@ import android.widget.Toast;
         }
 
 
+
+        // Boton para cambiar de una pantalla a otra
         public void ir_al_menu_principal(View view)
         {
             Toast.makeText(this, " Bienvenido al menu principal ", Toast.LENGTH_SHORT).show();

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.centrodebellezagala.clases.Clientes;
+import com.example.centrodebellezagala.clases.Modulo2Clientes;
 import com.example.centrodebellezagala.controladores.ClienteFirebaseController;
 import com.example.centrodebellezagala.utilidades.ImagenesFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,17 +35,20 @@ import java.util.List;
 
 public class Main2Registrarse extends AppCompatActivity
 {
+    // Atributos / declaraciones
     public EditText edt_nombre, edt_apellidos, edt_edad, edt_telefono, edt_correo, edt_clave1, edt_clave2;
     public ImageView img_registrarse;
     private FirebaseAuth mAuth;
 
+    Modulo2Clientes cli;
 
 
-    Clientes cli;
+
     public static final int NUEVA_IMAGEN = 1;
     Uri imagen_seleccionada = null;
 
 
+    // Estado de la aplicacion que se ejecuta si no se hace nada
     @Override
     protected void onResume()
     {
@@ -55,6 +57,8 @@ public class Main2Registrarse extends AppCompatActivity
     }
 
 
+
+    // Estado de la aplicacion que se ejecuta si todo esta bien
     @Override
     public void onStart()
     {
@@ -62,7 +66,7 @@ public class Main2Registrarse extends AppCompatActivity
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null)
         {
-            Intent intent = new Intent(Main2Registrarse.this,Main1Logueo.class);
+            Intent intent = new Intent(Main2Registrarse.this, Main1Logueo.class);
             startActivity(intent);
             finish();
         }
@@ -71,6 +75,7 @@ public class Main2Registrarse extends AppCompatActivity
 
 
 
+    // Metodo para inicializar los datos del registro en la aplicacion
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -91,6 +96,8 @@ public class Main2Registrarse extends AppCompatActivity
 
 
 
+
+    // Metodo que registra un nuevo cliente
     public void insertar_cliente(View view)
     {
         if(validarFormularioRegistro())
@@ -133,16 +140,16 @@ public class Main2Registrarse extends AppCompatActivity
 
                             }, email, img_registrarse);
 
-                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,email + "/" + ".png");
+                            cli = new Modulo2Clientes(nombre, apellidos, edad, telefono, correo,email + "/" + ".png");
                         }
                         else
                         {
-                            cli = new Clientes(nombre, apellidos, edad, telefono, correo,null);
+                            cli = new Modulo2Clientes(nombre, apellidos, edad, telefono, correo,null);
                         }
                         new ClienteFirebaseController().insertarCliente(new ClienteFirebaseController.ClienteStatus()
                         {
                             @Override
-                            public void clienteIsLoaded(List<Clientes> clientes, List<String> keys)
+                            public void clienteIsLoaded(List<Modulo2Clientes> clientes, List<String> keys)
                             {
 
                             }
@@ -172,7 +179,7 @@ public class Main2Registrarse extends AppCompatActivity
                             }
 
                             @Override
-                            public void clienteIsEncontrado(Clientes cli)
+                            public void clienteIsEncontrado(Modulo2Clientes cli)
                             {
 
                             }
@@ -189,13 +196,15 @@ public class Main2Registrarse extends AppCompatActivity
     }
 
 
+
+        // Metodo de validacion de campos en el registro, que no esten vacios
         public boolean validarFormularioRegistro()
         {
             boolean retorno = true;
 
             if(edt_nombre.getText().toString().isEmpty())
             {
-                edt_nombre.setError(" Ingresa un nombre valido ");
+                edt_nombre.setError(" Debes rellenar este campo ");
                 retorno = false;
             }
             if(edt_apellidos.getText().toString().isEmpty())

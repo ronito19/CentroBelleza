@@ -9,6 +9,10 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
+
+
+
+// Clase DatePicker que utilizamos para coger la fecha de una cita
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
     @Override

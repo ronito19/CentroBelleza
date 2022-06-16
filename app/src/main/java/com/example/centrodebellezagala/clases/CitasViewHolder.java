@@ -14,11 +14,13 @@ import com.example.centrodebellezagala.R;
 
 public class CitasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
+    // variables estaticas
     public static final String EXTRA_OBJETO_CITA = "es.ronito.citasViewHolder.objeto_cita";
     public static final String EXTRA_OBJETO_IMG_CITA = "es.ronito.citasViewHolder.img_cita";
     public static final String EXTRA_OBJETO_CITA_KEY = "es.ronito.citasViewHolder.objeto_cita_key";
 
 
+    // Declaracion de variables
     public TextView txt_rv_cita_correo = null;
     public TextView txt_rv_cita_nombre = null;
     public TextView txt_rv_cita_apellidos = null;
@@ -29,6 +31,7 @@ public class CitasViewHolder extends RecyclerView.ViewHolder implements View.OnC
     ListaCitasAdapter lcAdapter;
 
 
+    // Se instancian las variables
     public CitasViewHolder(@NonNull View itemView, ListaCitasAdapter lcAdapter)
     {
         super(itemView);
@@ -44,13 +47,15 @@ public class CitasViewHolder extends RecyclerView.ViewHolder implements View.OnC
         itemView.setOnClickListener(this);
     }
 
+
+    // funcion que se ejecuta cuando se da click al boton
     @Override
     public void onClick(View view)
     {
         int mPosition = getAdapterPosition();
-        List<CitaDatosCompletos> citas = this.lcAdapter.getListaCitas();
+        List<Modulo1CitaDatosCompletos> citas = this.lcAdapter.getListaCitas();
         List<String> keys = this.lcAdapter.getKeys();
-        CitaDatosCompletos cita = citas.get(mPosition);
+        Modulo1CitaDatosCompletos cita = citas.get(mPosition);
         String key = keys.get(mPosition);
 
         Intent intent = new Intent(lcAdapter.getC(), Main7MostrarDetallesCitas.class);

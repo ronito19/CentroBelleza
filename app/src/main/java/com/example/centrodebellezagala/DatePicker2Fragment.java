@@ -9,6 +9,9 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
+
+
+// Clase DataPicker2 para la fecha de la cita que editaremos en el MainDetalles de la cita
 public class DatePicker2Fragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
     @Override

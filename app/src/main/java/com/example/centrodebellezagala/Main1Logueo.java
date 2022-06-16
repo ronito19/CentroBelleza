@@ -28,10 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Main1Logueo extends AppCompatActivity
 {
 
+    // Atributos
     private EditText edt_correo, edt_clave;
     private FirebaseAuth mAuth;
 
 
+
+    // Estado de la aplicacion que se ejecuta si no se hace nada
     @Override
     protected void onResume()
     {
@@ -41,6 +44,7 @@ public class Main1Logueo extends AppCompatActivity
 
 
 
+    // Metodo para inicializar los datos de la aplicacion
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,6 +62,8 @@ public class Main1Logueo extends AppCompatActivity
     }
 
 
+
+    // Estado de la aplicacion que se ejecuta si todo esta bien
     @Override
     public void onStart()
     {
@@ -72,6 +78,7 @@ public class Main1Logueo extends AppCompatActivity
     }
 
 
+    // Metodo para loguearse si ya esta registrado
     public void Logueate(View view)
     {
         if(validarLogin())
@@ -106,6 +113,7 @@ public class Main1Logueo extends AppCompatActivity
 
 
 
+    // Boton para cambiar de pantalla a registrarse
     public void registrarse(View view)
     {
         Toast.makeText(Main1Logueo.this, " Por favor, REGISTRATE AHORA... ", Toast.LENGTH_SHORT).show();
@@ -117,6 +125,7 @@ public class Main1Logueo extends AppCompatActivity
     }
 
 
+    // Metodo de validacion de los campos del login
     public boolean validarLogin()
     {
         boolean retorno = true;
