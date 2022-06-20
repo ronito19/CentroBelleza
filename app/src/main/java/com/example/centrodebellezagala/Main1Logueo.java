@@ -146,6 +146,25 @@ public class Main1Logueo extends AppCompatActivity
 
 
 
-
+    public void restablecerContraseña(View view)
+    {
+        if(edt_correo.getText().toString().isEmpty())
+        {
+            edt_correo.setError(" Ingresa un correo ");
+        }
+        else
+        {
+            mAuth.sendPasswordResetEmail(edt_correo.getText().toString())
+                    .addOnCompleteListener(task ->
+                    {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(Main1Logueo.this, " Se ha enviado un correo para restablecer tu contraseña ", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(Log ->  Toast.makeText(Main1Logueo.this, " Introduzca un correo ya registrado ", Toast.LENGTH_LONG).show()
+                    );
+        }
+    }
 
 }

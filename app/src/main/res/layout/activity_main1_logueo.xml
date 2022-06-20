@@ -45,7 +45,7 @@
         android:id="@+id/bt_inicioSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:onClick="Logueate"
         android:text="LOGUEATE"
         android:textSize="20sp"
@@ -59,7 +59,7 @@
         android:id="@+id/txt_registro"
         android:layout_width="214dp"
         android:layout_height="40dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:onClick="mi_registro_de_datos"
         android:text="No estas registrado?"
         android:textAlignment="center"
@@ -76,7 +76,7 @@
         android:id="@+id/bt_registrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="16dp"
         android:onClick="registrarse"
         android:text="@string/registrate"
@@ -106,4 +106,20 @@
         app:layout_constraintEnd_toEndOf="@+id/edt_correo"
         app:layout_constraintStart_toStartOf="@+id/edt_correo"
         app:layout_constraintTop_toBottomOf="@+id/edt_correo" />
+
+    <TextView
+        android:id="@+id/txt_clave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="restablecerContraseña"
+        android:text="Olvidaste tu contraseña? Pincha aqui..."
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_registrate"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
